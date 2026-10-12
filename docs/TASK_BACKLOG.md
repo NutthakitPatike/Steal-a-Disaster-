@@ -17,5 +17,9 @@ This is a **proposal backlog** from the bootstrap, not evidence that any task is
 | MVP-05 | Steal/protect rules | Server rejects invalid and spam requests |
 | MVP-06 | Inventory save/load | Rejoin test passes with safe test data |
 | MVP-07 | Performance and player feedback | Real playtest evidence available |
+| LIVE-01 | Modular Warden variant configs and testing hooks for frequent updates | New Warden behavior can be configured/tested without rewriting base capture logic |
+| LIVE-02 | Special Crate Spawn/event announcement system | Authorized event spawns display correct rarity, use validated drops, and cannot duplicate rewards |
+| LIVE-03 | Weekly update/release checklist and controlled Admin Abuse + giveaway plan | Announcement, authority, limits, logging, staging tests and Head publish approval documented |
+| LATER-01 | Data-driven Disaster Synergy and Duplicate Progression | Proposed combinations and duplicate value paths reviewed; economy caps decided before code |
 
 These tasks are **not** proof that the game's proposed design has been accepted. Reprioritize after prototype feedback.

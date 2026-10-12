@@ -1,47 +1,42 @@
-# AGENTS.md — Roblox Create
+# AI agent entry point — Roblox Create
 
-This repository is a collaborative Roblox Luau game prototype. Every Codex agent must follow this file before editing.
+## Mission
+Help a three-person team prototype an original Roblox game that can be tested for player interest. "Steal a Disaster" is a **working hypothesis**, not a locked game design.
 
-## Context and priority
-1. Read README.md, docs/GAME_VISION.md, docs/TEAM_WORKFLOW.md, and docs/DECISIONS.md.
-2. Working title: Steal a Disaster. The concept is provisional and must be validated with players before scaling scope.
-3. Optimize for a fun, stable, mobile-friendly core loop; do not build speculative large systems.
+## Authority and evidence
+Priority: (1) current explicit user instruction, (2) this file, (3) confirmed decisions in [docs/DECISIONS.md](docs/DECISIONS.md), (4) [docs/GAME_VISION.md](docs/GAME_VISION.md), (5) actual code and config contracts, (6) relevant design notes, (7) active execution plan, (8) [CURRENT_STATE.md](CURRENT_STATE.md), (9) other docs, (10) history.
+When investigating **runtime behavior**, source, tests, and live Studio evidence override claims in prose. Label unsupported information UNKNOWN.
 
-## Authoritative ownership
-- Luau source code and Rojo project configuration: files in Git are the source of truth.
-- Roblox Studio: 3D map, visual assets, playtesting, and publishing. Studio MCP edits must not silently override Rojo-managed scripts.
-- Only a designated integrator manages the shared Studio place and publish operation.
-- The original imported/example Roblox place files are references, NOT licensed code/assets to ship without verified permission.
+## People and ownership
+- **Head:** the user, working through ChatGPT + lnwjud MCP; owns product decisions, integration and release approval. Do not assume the Head works in Codex.
+- **Two teammates:** work through their own Codex sessions, separate clones and branches.
+- Assign one owner, scoped paths/Studio zone, acceptance evidence and reviewer for each Issue. Follow [docs/TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md), including its AI-agnostic task contract; never overwrite another worker's unreviewed work. Another AI's chat context is not authoritative project state.
 
-## Architecture and security
-- Use Luau, prefer --!strict, small modules, clear typed interfaces.
-- Server owns currency, item ownership, rarity rolls, damage, purchase outcomes, and saves.
-- Validate all client input, RemoteEvents and RemoteFunctions on the server. Rate-limit repeatable actions. Never trust client-reported prices/rewards.
-- Shared modules in src/shared must not depend on server-only services.
-- No hardcoded credentials, Roblox API keys, webhook tokens, or personal data in Git.
-- Don't insert arbitrary toolbox/free models without reviewing scripts and asset rights.
-- No new dependency/framework unless task scope justifies it and the team agrees.
+## Work rules
+- Inspect the tree, branch/HEAD, git status, relevant code, and docs before edits.
+- Prefer the smallest correct change. Preserve unrelated work and existing architecture.
+- Git + Rojo is the source of truth for managed Luau. Studio is for maps, models, scene editing and playtests. Never let MCP and Rojo overwrite the same managed script.
+- Server must validate client requests that affect currency, ownership, item grants, saves, purchases and other authoritative outcomes.
+- Keep secrets out of Git and review licenses and scripts in third-party assets.
+- Do not force-push, delete data/assets, publish or modify production DataStores without Head approval. Merge to `main` only through a reviewed PR; the Head approves cross-team interfaces and releases, while teammates with Write permission may merge routine reviewed PRs according to [docs/TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md).
 
-## Collaboration rules
-- First inspect git status and the relevant files. Never overwrite unrelated work.
-- One agent per focused task and feature branch. Assign file ownership/area in the task description.
-- Don't edit main directly, force-push, merge or publish without explicit authorization.
-- Keep changes small and reviewable. Document API/event changes and migration needs.
-- For overlapping edits, coordinate through GitHub PRs; do not silently resolve conflicts by replacing another teammate's work.
-- Avoid destructive filesystem operations, deleting Studio instances, mass asset insertion, or live DataStore writes without explicit authorization and backup.
+## Skills — load on demand, not all at once
+- Nontrivial multi-stage analysis: `poteto-mode` from pstack, **only if available in the current runtime**.
+- Code and dependency choices: `ponytail` (smallest complete solution).
+- Roblox Studio MCP work: `roblox-studio-mcp`; cross-boundary code: `roblox-architecture`, `roblox-networking`, `roblox-security` as relevant.
+- UI/world/data/performance/growth: select the matching `roblox-gui`, `roblox-building`, `roblox-data`, `roblox-performance`, `roblox-growth-design`, or `roblox-analytics` skill only when relevant.
+- PR review: `ponytail-review` or `roblox-code-review`; documentation: `technical-writing` when available.
+Skills observed on one computer are **not** proof that other team members have them. Never claim a skill ran unless loaded and used. No plugin package is vendored in this repository.
 
-## Studio MCP / Rojo guardrails
-- Confirm the active Studio instance and place before ANY Studio mutation.
-- Prefer a local test copy for MCP mutations; back up the place first.
-- Use Studio MCP for inspecting, creating art/prototypes, and playtesting; use Git + Rojo for permanent Luau edits.
-- Never modify the same managed script simultaneously through MCP/Studio and Rojo.
-- Never publish to the production Roblox experience autonomously.
-
-## Definition of done
-- Requirements and affected files are summarized.
-- Luau formatted/linted; Rojo project builds if tools are installed.
-- Test relevant gameplay in Studio for real Roblox APIs (headless tests alone are insufficient).
-- Check keyboard/mouse, touch, 2-player abuse paths when relevant.
-- Report test results honestly; say NOT RUN if a tool is missing.
-- Update docs/TASK_BACKLOG.md and docs/DECISIONS.md for meaningful changes.
-- Handoff: changed files, behavior, tests, remaining risks, and next step.
+## Verification and routing
+- Report the commands actually run, results, and NOT RUN for unavailable tools. Use Studio playtests for Roblox runtime claims.
+- Getting started and current tool commands → [README.md](README.md)
+- Gameplay proposal and scope → [docs/GAME_VISION.md](docs/GAME_VISION.md)
+- Actual minimal file layout → [README.md](README.md) and `default.project.json`
+- Current verified checkpoint → [CURRENT_STATE.md](CURRENT_STATE.md)
+- Team ownership and handoffs → [docs/TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md)
+- Multi-phase work → [.agent/PLANS.md](.agent/PLANS.md)
+- Studio MCP workflow → [docs/STUDIO_MCP.md](docs/STUDIO_MCP.md)
+- Test expectations → [docs/TEST_PLAN.md](docs/TEST_PLAN.md)
+- Project decisions → [docs/DECISIONS.md](docs/DECISIONS.md)
+- Research into the ten provided Roblox reference games → [docs/REFERENCE_SOURCES.md](docs/REFERENCE_SOURCES.md)

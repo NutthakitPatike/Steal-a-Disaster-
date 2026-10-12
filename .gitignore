@@ -15,12 +15,18 @@ Thumbs.db
 *.rbxlx
 *.rbxm
 *.rbxmx
+# Explicitly version only reviewed, modular Studio-authored XML exports.
+!studio/exports/**/*.rbxmx
+!studio/exports/*.rbxmx
 
 # Package-manager generated content; commit lockfiles separately when packages are introduced.
 Packages/
 ServerPackages/
 DevPackages/
 sourcemap.json
+
+# Third-party research exports and extracted source (local research only)
+/reference_sources/
 
 # Secrets and machine-local configuration
 .env

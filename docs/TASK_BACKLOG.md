@@ -1,21 +1,21 @@
-# Tasks — Phase 0 and first playable test
+# Planned work (not a project status log)
 
-Task ownership is intentionally UNASSIGNED until teammates agree. Use GitHub Issues after the team repository exists.
+This is a **proposal backlog** from the bootstrap, not evidence that any task is complete. Verified progress lives only in [../CURRENT_STATE.md](../CURRENT_STATE.md). Move tasks to GitHub Issues when a shared remote exists.
 
-| ID | Area | Task | Done when |
-| --- | --- | --- | --- |
-| P0-01 | Dev | Install Rokit toolchain on four computers | All run rojo/selene/stylua locally |
-| P0-02 | Dev | Verify Rojo ↔ local Studio | Simple bootstrap output visible in Studio |
-| P0-03 | AI | Enable official Studio MCP per computer | Codex inspects a test place and completes a reversible smoke action |
-| P0-04 | Team | Create private GitHub repo, invite 3 friends | All have least-privilege access and PR workflow |
-| P0-05 | Studio | Create private staging experience and Team Create roles | Safe test place and saved backup exist |
-| P0-06 | Design | Choose initial map, UI wireframe, disaster list | Team accepts one-page vertical-slice requirements |
-| MVP-01 | Server | Player plot ownership + secure claim | Only owner may claim/change their plot |
-| MVP-02 | Server | Currency/reward service | Server-only authoritative award rules, tests |
-| MVP-03 | Game | 3 disaster prototypes with clear effects | All observable in 2-player Studio test |
-| MVP-04 | Client | First-minute onboarding, mobile controls | New tester can perform first action without guidance |
-| MVP-05 | Server | Steal/protect rules and validation | 2+ player abuse tests pass |
-| MVP-06 | Data | Inventory save/load and error handling | Rejoin preserves data in safe test environment |
-| MVP-07 | QA | Multiplayer performance + feedback instrumentation | Repeatable tester report and next iteration priorities |
+| ID | Proposed work | Acceptance evidence |
+| --- | --- | --- |
+| P0-01 | Install Rokit toolchain on each machine | Each computer can run its tool commands |
+| P0-02 | Check Rojo sync and build | A local test place shows expected Bootstrap logs |
+| P0-03 | Check ChatGPT/lnwjud Studio access and Codex Studio MCP access separately | Each required client inspects the correct test place |
+| P0-04 | Connect the existing GitHub repository (currently PUBLIC), decide visibility, invite 2 collaborators, seed `main` and configure reviewed PRs | Each of 3 accounts can push a branch; a reviewed PR can merge; main is not directly pushed |
+| P0-05 | Create a safe staging place and backup procedure | Team can test and restore it |
+| P0-06 | Validate prototype mechanics and scope | Head approves a small vertical-slice brief |
+| MVP-01 | Plot ownership and secure claim | Unauthorized claims rejected |
+| MVP-02 | Server-authoritative reward/currency | Client cannot grant itself currency |
+| MVP-03 | Disaster Containment proof: Stabilize vs Snatch, one living tiny Disaster reaction, and one Warden chase | Solo Studio test shows a meaningful, fair difference between capture choices; no random unavoidable loss |
+| MVP-04 | First-minute onboarding and mobile controls | New player can perform first action |
+| MVP-05 | Steal/protect rules | Server rejects invalid and spam requests |
+| MVP-06 | Inventory save/load | Rejoin test passes with safe test data |
+| MVP-07 | Performance and player feedback | Real playtest evidence available |
 
-No monetization or large content expansion before the core loop is validated.
+These tasks are **not** proof that the game's proposed design has been accepted. Reprioritize after prototype feedback.

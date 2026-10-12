@@ -1,6 +1,6 @@
 # Team agreement checklist — DRAFT ONLY
 
-This is a discussion checklist, NOT a signed agreement or legal advice. All four people must review it before publishing a commercial game or buying paid assets.
+This is a discussion checklist, NOT a signed agreement or legal advice. All three team members must review it before publishing a commercial game or buying paid assets.
 
 ## People & responsibilities
 - Team members (Roblox usernames and GitHub accounts): TBD

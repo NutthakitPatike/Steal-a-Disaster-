@@ -1,34 +1,29 @@
-# Roblox Studio MCP + Codex
+# Roblox Studio MCP — Head and teammates
 
-## Preferred: Roblox Studio built-in MCP (official)
-Roblox Studio already includes an MCP server, capable of reading the live game tree, editing Studio objects, running Luau, inspecting errors, and playtesting. It is **not** the same thing as Rojo.
+Two supported working paths; do not assume the Head uses Codex.
 
-**On EACH teammate's machine:**
-1. Update Roblox Studio and open a local TEST place.
-2. In Roblox Studio, open Assistant → ... → Manage MCP Servers.
-3. Enable **Studio as MCP server**.
-4. Under **Quick connect**, enable **Codex CLI** / ChatGPT (codex), whichever is shown on that machine.
-5. Restart Codex if requested; check the green connected-client indicator in Studio.
-6. Ask Codex to list Studio instances and inspect (READ ONLY) the current place. Confirm the correct place before any write.
-7. Test creating a disposable Part in a local test place, playtest, then delete it with the user's authorization.
+## Head: ChatGPT + lnwjud MCP
+- Project workspace: `D:\Roblox\Create`.
+- Use lnwjud workspace/Git tools for files and Git; do not edit repository text through shell commands.
+- lnwjud can inspect/discover local MCP servers. The last observed lnwjud server list did **not** include a standalone Roblox Studio server. This does not prove Studio MCP is unavailable to another client.
+- For Studio operations, first discover a supported Studio bridge. Confirm connection, identify exact Studio place/instance, inspect its state, then edit only a test place.
+- If there is no usable Studio bridge through lnwjud, report the block. Do not describe Codex MCP registration as a successful ChatGPT–Studio connection.
 
-Official install/quick connect reference:
-- https://create.roblox.com/docs/studio/mcp
-- https://github.com/Roblox/roblox-studio-agent-plugin
+## Teammates: Codex + official Roblox Studio MCP
+1. Open a local TEST place in Roblox Studio.
+2. In Studio Assistant's MCP management panel, enable **Studio as MCP server** and use the Codex quick-connect flow, if available.
+3. In Codex, confirm the MCP entry and then list/inspect Studio instances. **Enabled configuration alone does not prove a live connection**.
+4. Perform a reversible test in a throwaway place, read it back and check playtest/errors.
 
-## If quick connect is not available
-Follow the official page's Codex CLI or JSON instructions. On Windows, the bundled Studio bridge generally lives at `%LOCALAPPDATA%\Roblox\mcp.bat`. Do not blindly override existing global MCP settings or use a third-party executable when the built-in server works.
+Official documentation: https://create.roblox.com/docs/studio/mcp
 
-## Rojo != MCP
-- **Rojo:** files in `src/` → scripts inside your local Studio test session.
-- **MCP:** AI can inspect/playtest/create/edit inside the ACTIVE Studio window.
-- Use Rojo + Git for long-lived scripted code. Use MCP mainly for observation, playtesting, 3D prototyping, and controlled edits.
-- Never let MCP replace a Rojo-owned script while Rojo sync is active.
-
-## Other possible MCP tools (later, only if needed)
-- GitHub MCP: inspect issues/PRs and coordinate reviews (not a substitute for Git).
-- Documentation MCP: lookup current Luau/Roblox APIs; verify against Creator Hub docs.
-- Avoid installing multiple Studio-control MCP servers simultaneously until the built-in one has been tested.
-
-## Access / security
-Studio MCP may modify scripts, objects, and assets. Use trusted clients, test place only, no production publishing or live DataStore writes from an agent. Never put local MCP credentials or API keys in Git.
+## Rojo vs MCP
+- Rojo synchronizes Git-managed `src/` scripts to Studio.
+- Studio MCP can inspect or change live scenes and run playtests.
+- Do not allow both to write the same script concurrently.
+- Before a destructive Studio edit, confirm target place and take a backup.
+- Studio's Team Create and cloud publishing are **separate from GitHub**. A collaborator needs Roblox Studio edit permissions **as well as** GitHub repository access.
+- Scene workflow: edit an assigned zone/model in Studio → export its source as `studio/exports/<feature>.rbxmx` → commit/push a feature branch → review PR → merge → import/reconcile into a shared staging place and playtest. Export only material you own or are licensed to redistribute.
+- A Studio-authored Script that is meant to be Rojo-managed must be transferred into `src/` and tested through Rojo; do not let Studio and Rojo overwrite each other.
+- For a full `.rbxlx` backup or binary `.rbxm` export, plan a controlled snapshot and Git LFS with the whole team rather than committing uncontrolled binary files.
+- Never publish a live experience or modify a production DataStore through an unattended agent.

@@ -1,13 +1,9 @@
-# Architectural decisions
+# Decisions and unresolved assumptions
 
-## ADR-001 — Source of truth (2026-10-12)
-Accepted: Git + Rojo manages scripted Luau code. Roblox Studio manages authored scenes and playtests. Studio MCP is a controlled adjunct, not the canonical Luau source.
+- **2026-10-12, confirmed by the Head:** the Head works primarily through ChatGPT + lnwjud MCP; two teammates use Codex. The Head controls product direction and release approval.
+- **Current implementation, verified from config:** Luau under `src/` is mapped via Rojo in `default.project.json`. Git stores source; map assets are not in this Rojo mapping. The team still needs to validate the Rojo + Studio workflow on a running toolchain.
+- **2026-10-12/13, confirmed by the Head:** Direction A and **Disaster Containment** are the accepted game concept: living collectible Disasters; a deliberate choice between **Stabilize** (slower, safer capture) and **Snatch** (faster, less stable capture); each creature's reaction should affect the escape from an NPC Warden. The familiar Speed/Treadmill/Trail/Zone Index/collection loop supports this core interaction. The Head endorsed the concept, **not final timings, economy, map dimensions, exact reactions, a release date or verified fun**. See [GAME_VISION.md](GAME_VISION.md). The title remains provisional.
+- **2026-10-13, confirmed by the Head:** GitHub collaboration uses [NutthakitPatike/Steal-a-Disaster-](https://github.com/NutthakitPatike/Steal-a-Disaster-), with three humans using their own accounts. Teammates may Commit/Push/Merge through reviewed PRs. Studio-based world/model work is allowed, but changes must be exported/versioned and integrated into staging; Studio publishing is separate from Git.
+- **Pending team decisions:** invitees' GitHub usernames, whether the repository should remain public (it is currently public), member ownership boundaries, Roblox Group/game ownership, revenue arrangements, staging experience, branch rules and asset permissions. See [TEAM_AGREEMENT_TEMPLATE.md](TEAM_AGREEMENT_TEMPLATE.md).
 
-## ADR-002 — Collaboration (2026-10-12)
-Accepted: four human contributors with one Codex each; independent clones / per-task branches / PR review. Avoid direct concurrent edits of the same file and unsupervised publishing.
-
-## ADR-003 — Prototype scope (2026-10-12)
-Provisional: working concept `Steal a Disaster!`. Gameplay still must pass small beta testing before a larger production commitment. Do not treat the brand or mechanics as final.
-
-## ADR-004 — Dependencies (2026-10-12)
-Accepted initially: small Rojo starter project + pinned toolchain. Add Wally packages or UI frameworks only when features require them. Do not introduce a complex framework prematurely.
+Earlier staffing assumptions are superseded by the Head's confirmation that the team has three people in total. Toolchain versions remain subject to actual verification.

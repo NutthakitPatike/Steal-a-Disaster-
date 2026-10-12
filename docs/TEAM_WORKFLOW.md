@@ -1,46 +1,66 @@
-# Four-person team + Codex workflow
+# Team workflow, ownership and handoff
 
-Assumption: one founder and three friends = four humans. Assign actual names later. Everyone can run Codex, but an AI is a helper, not a shared source of truth.
+## Roles (confirmed vs proposed)
+- **Head — CONFIRMED:** user directs the game through ChatGPT + lnwjud MCP and approves integration, major product choices and publishing.
+- **Two teammates — CONFIRMED:** each uses Codex; their real names, GitHub IDs, Roblox permissions and exact assignments are UNKNOWN.
+- **Proposed assignments (not yet accepted):** Teammate 1 server/gameplay; Teammate 2 client/UI; the Head oversees integration, world/art tasks and QA, delegating work by task as needed. These are not confirmed ownership assignments.
 
-## Suggested responsibilities (initial)
-- **Owner A — Producer / Integrator:** game design decisions, architecture, merges, releases, metrics, and conflict resolution.
-- **Owner B — Server gameplay:** plot ownership, server-side steal rules, rewards, secure RemoteEvents, persistence.
-- **Owner C — Client/UI:** onboarding, HUD, mobile controls, audio/visual feedback, UX tests.
-- **Owner D — World/art & QA:** map greybox, models/animations, performance and multiplayer test cases, media captures.
+## Source and change boundaries
+- Central remote: [NutthakitPatike/Steal-a-Disaster-](https://github.com/NutthakitPatike/Steal-a-Disaster-). All three humans use **their own GitHub accounts**, local clones and feature branches. Never share a GitHub login or one writable working directory.
+- One task has one human owner and named touched paths. Others review or coordinate before changing those paths.
+- `src/server/`: proposed server owner. `src/client/`: proposed client owner. `src/shared/`, `default.project.json` and shared remotes: cross-team changes require Head review.
+- Studio-created maps, models and animations: assign an explicit scene/zone owner before shared editing.
+- **All three contributors may commit and push their own branches.** All three may merge **reviewed PRs** into `main` once the repository grants Write access and branch rules allow it. Require at least one other person's review; do not self-approve. The Head reviews changes to shared interfaces, architecture, economy/security and final releases. The Head retains publishing/release approval, but does not have to click Merge on routine reviewed PRs.
+- Do not write a Rojo-owned script from Studio MCP while Rojo is syncing that script.
 
-Ownership is about review responsibility, not forbidding help from other teammates. Each task identifies an owner, reviewers, and touched paths.
+## Different AIs, one shared contract
 
-## Pull request flow
-1. Take one small task from docs/TASK_BACKLOG.md or GitHub Issues.
-2. Make a feature branch: `feat/short-name`, `fix/short-name`, or `docs/short-name`.
-3. Send Codex task prompt with acceptance criteria and affected paths.
-4. Agent inspects AGENTS.md + docs, then implements only agreed scope.
-5. Local check: format, lint, Rojo build, Studio playtest when necessary.
-6. Open a PR describing What/Why/Tests/Risks; request at least one human review.
-7. Integrator merges after conflicts and blocked tests are resolved.
+Each teammate can use Codex, ChatGPT or another assistant, or work manually in Roblox Studio. **The repository and approved Issue/PR, not an AI's private conversation or personal memory, are the source of truth.** Every AI should read `AGENTS.md` on task start, discover actual tool availability, inspect the branch and current code, and follow the same boundaries.
 
-Only the designated integrator may push deployment/publish changes. Branch protection is configured in GitHub after the remote is created.
+**Task contract:** assign one human owner, one GitHub Issue or backlog ID, expected outcome, permitted files or Studio zone, acceptance tests and reviewer **before** an AI edits anything. A change to a shared module or another person's zone requires coordination in the Issue first. A second AI must not silently take over an active branch; use its own branch or explicitly hand off.
 
-## Avoiding collision
-- Do not share a physical local folder among four independent agents.
-- Each person clones the same GitHub repository to their own computer.
-- One feature branch per active task. On one machine, use separate Git worktrees if running multiple agents.
-- Code: Git + Rojo is authoritative. Scene/3D: Studio Team Create is authoritative for approved art edits, with explicit ownership per zone/model.
-- **Never use two writers** on the same Rojo-managed script (Studio MCP + external editor) at the same time.
-- For large world changes, coordinate one person per scene/zone and export a place backup before merging updates.
+**Copyable first message to any teammate's AI:**
 
-## Coordination rhythm (lightweight)
-- 10-minute asynchronous check-in daily: Yesterday / Today / Blocker.
-- Weekly: latest playable demo, retention/performance discussion, next 3 priorities.
-- Stop adding features when the first minute of the game is not yet fun.
+```text
+We are one of three developers on Steal a Disaster.
+Use this cloned repository as the source of truth. Read AGENTS.md,
+docs/TEAM_WORKFLOW.md, docs/GAME_VISION.md and CURRENT_STATE.md.
+Inspect git status, main/feature branch and relevant code BEFORE edits.
+Human owner: <name>
+Assigned Issue/task: <id and goal>
+Allowed files/Studio zone: <paths or zone name>
+Acceptance evidence: <checks and expected gameplay>
 
-## Studio + shared place
-- Use a private test place / staging experience. Do not connect experimental AI changes to production.
-- Enable group collaboration, assign permissions, and confirm age-check requirements with Roblox Creator Hub.
-- Back up a downloadable place copy before changing many objects. A Git PR does NOT back up untracked Studio-only assets.
+Work only within the assigned scope. Use a fresh feature branch; do
+not change another owner's work or alter shared contracts unreviewed.
+If Studio work is needed, confirm the staging/test place and export
+reviewable models; Studio Save/Publish does not commit to Git.
+Report exact tests as PASS/FAIL/NOT RUN, changes, risks and a PR link.
+Push only the feature branch. Never push directly to main, force push,
+publish the live Roblox game or merge an unreviewed PR.
+```
 
-## Code review: minimum acceptance
-- Server validates requests and prevents free currency/items.
-- UI works with touch input, not only keyboard/mouse.
-- No undisclosed Toolbox scripts or unlicensed copied assets.
-- No unexplained data migration or broad directory rewrite.
+Each teammate should fill the placeholders for their own assignment; do **not** store credentials or personal account tokens in the prompt, repository or Studio exports.
+
+## Task and PR flow
+1. Record one bounded task with acceptance criteria, **owner, allowed files/Studio zone and reviewer**, in a GitHub Issue once `main` is pushed (until then use [docs/TASK_BACKLOG.md](TASK_BACKLOG.md)). Mark overlapping tasks before they start; avoid two people editing the same model or shared module.
+2. Work on `feat/*`, `fix/*`, or `docs/*` branch.
+3. Read [../AGENTS.md](../AGENTS.md) and the relevant source. Use pstack for complex work and ponytail for minimal implementation **if installed in that runtime**.
+4. Run applicable checks. Involve Roblox Studio for gameplay/runtime evidence.
+5. Push the branch to `origin` and open a PR against `main` with changed files, behavior, tests, risks and Studio export/snapshot links as needed. Another person reviews. A team member with Write access may merge after the relevant approval(s) and checks pass. Use `squash` for a small feature PR unless preserving multiple commits materially helps.
+6. After merge, everyone pulls the latest `main` before starting or integrating further work. Do not push directly to `main`; use the PR flow even when GitHub rules are not yet enforced.
+
+## Handoff (one short message or PR comment)
+```text
+Branch / HEAD:
+Owner / scope / touched paths:
+Completed:
+Verification run (with PASS, FAIL, NOT RUN):
+Known risks / blockers / unresolved decisions:
+Next action:
+```
+
+Use [../CURRENT_STATE.md](../CURRENT_STATE.md) for the verified project-wide checkpoint, not per-agent progress logs. Keep planned work in the backlog or GitHub Issues. Create a task-specific execution plan only when [.agent/PLANS.md](../.agent/PLANS.md) requires it.
+
+## Studio safety
+Team members may build **models, zones, terrain and animations in Roblox Studio directly**. Give each area a named owner and use a staging place or isolated test place before sharing. **Studio Save/Publish or Team Create is NOT a Git commit.** Export the changed scene/model to `studio/exports/<zone-or-feature>.rbxmx` (small, reviewable, text-based Roblox model export) on the owning feature branch, commit/push it and link a screenshot or short playtest note in the PR. Keep Rojo-managed scripts in `src/`; if native Studio scripts are needed, move the authored Luau into source control or explicitly review the export to avoid diverging duplicates. Do not casually commit full `.rbxlx` files: deliberate staging-place backups or binary packages need an assigned owner, size review and Git LFS plan. Reimport/reconcile approved exports into the shared staging place after merge; verify the actual result in Studio. Git does not back up unexported Studio objects. No unattended production Publish, DataStore migrations or purchases.

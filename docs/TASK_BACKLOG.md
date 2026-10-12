@@ -10,6 +10,7 @@ This is a **proposal backlog** from the bootstrap, not evidence that any task is
 | P0-04 | Public GitHub repository and `main` seeded **DONE**; invite 2 collaborators and configure mandatory PR/review branch rules **PENDING** | Each of 3 accounts can push a branch; a reviewed PR can merge; direct main pushes are blocked |
 | P0-05 | Create a safe staging place and backup procedure | Team can test and restore it |
 | P0-06 | Validate prototype mechanics and scope | Head approves a small vertical-slice brief |
+| MAP-01 | Review [Map Concept v1](MAP_CONCEPT.md) with Head + 2 teammates before Studio implementation | Seven sketch Bays interpreted/assigned deliberately, first Zone escape and Admin Abuse placement reviewed; Head approves/revises layout |
 | MVP-01 | Plot ownership and secure claim | Unauthorized claims rejected |
 | MVP-02 | Server-authoritative reward/currency | Client cannot grant itself currency |
 | MVP-03 | **Containment Crate proof:** random tier spawn, Stabilize vs Snatch, one unstable-crate escape reaction and Warden chase, return-to-base opening and randomized **same-tier** tiny Disaster | Solo Studio test proves two fair escape choices and a base-only one-time reveal; 2-player/disconnect cases cannot duplicate/re-roll rewards |

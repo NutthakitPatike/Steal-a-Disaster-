@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 870" width="1200" height="870" role="img" aria-labelledby="title desc">
+<title id="title">Steal a Disaster — Map Concept v1, top-down schematic</title>
+<desc id="desc">A wide horizontal hub with seven flexible bays, a central vertical access lane, branching future zones, a Zone 1 above with two escape routes, a separate event plaza and future-zone junction. Not to scale, all details await team review.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#111b32"/><stop offset="1" stop-color="#10172a"/></linearGradient>
+ <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#69e3d1"/></marker>
+ <marker id="yellowArrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#ffdb86"/></marker>
+ <style>
+ .tx{font:600 18px 'Segoe UI',Arial,sans-serif;fill:#f2f7ff}.sm{font:500 13px 'Segoe UI',Arial,sans-serif;fill:#c3d1e4}.cap{font:700 13px 'Segoe UI',Arial,sans-serif;letter-spacing:1.5px;fill:#73ddce}.tiny{font:500 11px 'Segoe UI',Arial,sans-serif;fill:#b9cee2}.line{stroke:#67dfcf;stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}.dashed{stroke:#8aa4cf;stroke-width:3;stroke-dasharray:8 7;fill:none}
+ </style>
+</defs>
+<rect width="1200" height="870" fill="url(#bg)"/>
+<text x="48" y="48" fill="#f8fcff" font-family="Segoe UI, Arial" font-weight="750" font-size="27">STEAL A DISASTER!</text>
+<text x="48" y="74" class="cap">MAP CONCEPT V1 · TOP-DOWN · REVIEW DRAFT</text>
+<rect x="950" y="30" width="202" height="41" rx="19" fill="#243954" stroke="#6a819d"/>
+<text x="1051" y="55" fill="#c5d8ef" font-size="13" text-anchor="middle" font-family="Segoe UI, Arial">NOT TO SCALE</text>
+<!-- Reserved portal wings -->
+<rect x="45" y="115" width="222" height="99" rx="14" fill="#25334c" stroke="#6c8db9" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="156" y="148" class="tx" text-anchor="middle">FUTURE ZONE</text>
+<text x="156" y="172" class="sm" text-anchor="middle">West portal / expansion</text>
+<text x="156" y="193" class="tiny" text-anchor="middle">not built in prototype</text>
+<rect x="933" y="115" width="222" height="99" rx="14" fill="#25334c" stroke="#6c8db9" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="1044" y="148" class="tx" text-anchor="middle">FUTURE ZONE</text>
+<text x="1044" y="172" class="sm" text-anchor="middle">East portal / expansion</text>
+<text x="1044" y="193" class="tiny" text-anchor="middle">not built in prototype</text>
+<!-- Zone 1 -->
+<rect x="303" y="115" width="594" height="313" rx="20" fill="#183f4b" stroke="#45afad" stroke-width="3"/>
+<text x="600" y="150" class="tx" text-anchor="middle" font-size="23">ZONE 1 · TINY WEATHER</text>
+<text x="600" y="174" class="sm" text-anchor="middle">One Warden · visible crate rarity · two readable ways out</text>
+<!-- Cover/hazards -->
+<rect x="340" y="228" width="83" height="54" rx="12" fill="#36616a" stroke="#6bb2b6"/>
+<text x="381" y="251" class="sm" text-anchor="middle">Cover</text>
+<text x="381" y="269" class="tiny" text-anchor="middle">A</text>
+<rect x="777" y="228" width="83" height="54" rx="12" fill="#36616a" stroke="#6bb2b6"/>
+<text x="818" y="251" class="sm" text-anchor="middle">Cover</text>
+<text x="818" y="269" class="tiny" text-anchor="middle">B</text>
+<circle cx="510" cy="225" r="33" fill="#a1cde0" fill-opacity=".18" stroke="#94def0" stroke-width="2"/>
+<text x="510" y="220" class="sm" text-anchor="middle">Crate</text>
+<text x="510" y="237" class="tiny" text-anchor="middle">spawn A</text>
+<circle cx="694" cy="228" r="33" fill="#a1cde0" fill-opacity=".18" stroke="#94def0" stroke-width="2"/>
+<text x="694" y="221" class="sm" text-anchor="middle">Crate</text>
+<text x="694" y="238" class="tiny" text-anchor="middle">spawn B</text>
+<rect x="532" y="300" width="135" height="57" rx="14" fill="#733c4b" stroke="#e596a2" stroke-width="2"/>
+<text x="599" y="321" class="tx" text-anchor="middle">WARDEN</text>
+<text x="599" y="339" class="tiny" text-anchor="middle">patrol / chase</text>
+<path d="M474 270 C388 310 393 348 459 387" class="line"/>
+<path d="M723 273 C812 310 813 349 739 387" class="line"/>
+<text x="385" y="340" class="sm" text-anchor="middle">Escape A</text>
+<text x="824" y="341" class="sm" text-anchor="middle">Escape B</text>
+<path d="M459 387 Q520 402 552 405" stroke="#67dfcf" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M739 387 Q682 402 646 405" stroke="#67dfcf" stroke-width="4" fill="none" stroke-linecap="round"/>
+<!-- Safe gate -->
+<rect x="485" y="410" width="230" height="58" rx="12" fill="#2c6455" stroke="#8ce6b1" stroke-width="2"/>
+<text x="600" y="433" class="tx" text-anchor="middle">SAFE EXIT</text>
+<text x="600" y="451" class="sm" text-anchor="middle">Warden stops here</text>
+<path d="M600 469 L600 630" stroke="#69e3d1" stroke-width="35" stroke-opacity=".12"/>
+<path d="M600 470 L600 627" stroke="#69e3d1" stroke-width="3" stroke-dasharray="9 9" marker-end="url(#arrow)"/>
+<text x="614" y="542" class="sm">Main return lane</text>
+<!-- Cross-area / events -->
+<rect x="49" y="491" width="305" height="124" rx="14" fill="#533b63" stroke="#bb8ace" stroke-width="2"/>
+<text x="201" y="522" class="tx" text-anchor="middle">EVENT PLAZA</text>
+<text x="201" y="543" class="sm" text-anchor="middle">Admin Abuse / giveaways</text>
+<text x="201" y="562" class="sm" text-anchor="middle">Announcements / special crates</text>
+<text x="201" y="585" class="tiny" text-anchor="middle">Separate from the escape chokepoint</text>
+<path d="M354 553 L547 553" class="dashed"/>
+<rect x="845" y="491" width="308" height="124" rx="14" fill="#2c3a5e" stroke="#90aff4" stroke-width="2"/>
+<text x="999" y="522" class="tx" text-anchor="middle">ZONE JUNCTION</text>
+<text x="999" y="543" class="sm" text-anchor="middle">Future portal routing</text>
+<text x="999" y="564" class="sm" text-anchor="middle">No forced trip through Zone 1</text>
+<text x="999" y="584" class="tiny" text-anchor="middle">Add branches in future updates</text>
+<path d="M845 552 L651 552" class="dashed"/>
+<path d="M158 214 L158 465 L354 465" class="dashed"/>
+<path d="M1044 214 L1044 465 L845 465" class="dashed"/>
+<!-- Horizontal hub footprint -->
+<rect x="43" y="639" width="1112" height="185" rx="20" fill="#293550" stroke="#728cbf" stroke-width="3"/>
+<text x="600" y="667" fill="#e9f1ff" font-size="18" text-anchor="middle" font-family="Segoe UI,Arial" font-weight="700">HORIZONTAL HUB FOOTPRINT — BASED ON ORIGINAL 7-BAY SKETCH</text>
+<!-- Seven bays -->
+<g font-family="Segoe UI,Arial" text-anchor="middle">
+<rect x="70" y="680" width="137" height="112" rx="12" fill="#344768" stroke="#779dcc"/><text x="138" y="714" class="tx">BAY 1</text><text x="138" y="738" class="sm">Flexible</text><text x="138" y="759" class="tiny">base / service?</text>
+<rect x="222" y="680" width="137" height="112" rx="12" fill="#344768" stroke="#779dcc"/><text x="290" y="714" class="tx">BAY 2</text><text x="290" y="738" class="sm">Flexible</text><text x="290" y="759" class="tiny">base / service?</text>
+<rect x="374" y="680" width="137" height="112" rx="12" fill="#344768" stroke="#779dcc"/><text x="442" y="714" class="tx">BAY 3</text><text x="442" y="738" class="sm">Flexible</text><text x="442" y="759" class="tiny">base / service?</text>
+<rect x="526" y="680" width="137" height="112" rx="12" fill="#586b68" stroke="#97e2ce" stroke-width="2"/><text x="594" y="708" class="tx">CENTRAL</text><text x="594" y="730" class="tx">HUB</text><text x="594" y="753" class="tiny">speed / index</text><text x="594" y="772" class="tiny">trail / info</text>
+<rect x="678" y="680" width="137" height="112" rx="12" fill="#344768" stroke="#779dcc"/><text x="746" y="714" class="tx">BAY 5</text><text x="746" y="738" class="sm">Flexible</text><text x="746" y="759" class="tiny">base / service?</text>
+<rect x="830" y="680" width="137" height="112" rx="12" fill="#344768" stroke="#779dcc"/><text x="898" y="714" class="tx">BAY 6</text><text x="898" y="738" class="sm">Flexible</text><text x="898" y="759" class="tiny">base / service?</text>
+<rect x="982" y="680" width="137" height="112" rx="12" fill="#344768" stroke="#779dcc"/><text x="1050" y="714" class="tx">BAY 7</text><text x="1050" y="738" class="sm">Flexible</text><text x="1050" y="759" class="tiny">base / service?</text>
+</g>
+<text x="600" y="849" fill="#bfcde1" text-anchor="middle" font-family="Segoe UI,Arial" font-size="13">Bays 1–7 are UNASSIGNED placeholders — number of player plots, positions and scale await Head + team approval</text>
+</svg>

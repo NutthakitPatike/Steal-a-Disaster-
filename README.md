@@ -49,4 +49,4 @@ The commands above are the intended workflow. **They have not passed on the insp
 See [docs/STUDIO_MCP.md](docs/STUDIO_MCP.md) for ChatGPT/lnwjud and Codex routes. Available local skill names include pstack's `poteto-mode`, `ponytail`, and task-specific `roblox-*`; [AGENTS.md](AGENTS.md) defines when to use them. Each contributor must check their own setup. Do not copy third-party plugin code into Git.
 
 ## Source of truth
-Read [AGENTS.md](AGENTS.md) first; [CURRENT_STATE.md](CURRENT_STATE.md) holds the latest verified checkpoint. Game idea: [docs/GAME_VISION.md](docs/GAME_VISION.md). Unverified decisions remain open.
+Read [AGENTS.md](AGENTS.md) first; [CURRENT_STATE.md](CURRENT_STATE.md) holds the latest verified checkpoint. Game idea: [docs/GAME_VISION.md](docs/GAME_VISION.md). Proposed map for team review: [docs/MAP_CONCEPT.md](docs/MAP_CONCEPT.md) ([top-down SVG](docs/assets/map-concept-v1.svg)). The original seven boxes are **not confirmed player plots**. Unverified decisions remain open.

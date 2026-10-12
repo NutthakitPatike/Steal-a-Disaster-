@@ -86,21 +86,17 @@ Each capture Zone spawns **Containment Crates** with visible tiers from its data
 
 **Fairness:** guard behavior should be readable and independently testable; never guarantee a catch or arbitrary instant kill. Zone 1 allows initial success with starter Speed Power and small Disaster rewards. Higher Zones scale through both Warden behavior and crate pools. Guard pursuit is server authoritative; use limited NPC count, bounded pathfinding and a clear safe zone. Spawn rates, reward odds, speed thresholds, escape times and chase ranges are **UNKNOWN pending design/playtesting**.
 
-## 6. Map layout — proposed greybox
+## 6. Map layout — [Map Concept v1 for team review](MAP_CONCEPT.md)
 
-Six player plots around a short central plaza. Two **distinct capture zones** beyond the plaza: Breezy Fields (starter) and Static Ridge (higher speed). A visible treadmill near each base or in a common training lane, a small Trail Shop, and one Index panel that switches by zone.
+The Head's original black-and-white sketch shows **one wide horizontal hub area with seven internal rectangular footprints** and **a narrow upward connector**. What these seven rectangles represent has **not been confirmed**. The previous "six player plots / two Zones in fixed positions" illustration was a **draft assumption, not approved map topology**.
 
-```
-           [BREEZY FIELDS: Zone 1]
-                       |
-   [Plot A]        [TRAIN/PLAZA]        [Plot B]
-   [Plot C]         [TRAIL SHOP]        [Plot D]
-   [Plot E]         [ZONE INDEX]        [Plot F]
-                       |
-            [STATIC RIDGE: Zone 2]
-```
+The [proposed top-down Map Concept v1](MAP_CONCEPT.md) and its [editable SVG overview](assets/map-concept-v1.svg) keep the wide seven-Bay footprint with one central upward return path while reserving:
+- a suggested central Hub for training, Index and Trail Shop;
+- a small **Zone 1** with crate spawn candidates, one Warden, **two escape routes** and a clear Safe Exit;
+- an **opening station within the player's own base** after returning with the secured crate;
+- an optional, separate weekly **Event Plaza** for Admin Abuse/special spawns and a **Future Zone Junction** for branching expansion without forcing every trip through Zone 1.
 
-**Layout rules:** short route from spawn to first crate; direct view of a guarded Zone; safe return path into a base with an obvious **crate-opening station**, not only pedestals. Preserve room to branch into new Zones rather than extending a single endless corridor. Keep a permanent hub/plots and use later gates/fast travel so future updates do not make return runs tedious. Actual map dimensions, Zone count and chase lengths must be tuned in Roblox Studio, not invented in documentation.
+**Status: design proposal pending Head + two teammates' review.** Do not conclude there are seven player bases or build a permanent layout from the sketch's unlabeled boxes. No exact dimensions, player plot count, Zone 2 location or Warden escape distances are fixed. Keep beginner travel short, retain a clean Safe Exit, and validate the proposed two routes and mobile usability in a **test greybox only after concept approval**.
 
 ## 7. Onboarding and UI
 

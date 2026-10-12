@@ -12,7 +12,7 @@ This is a **proposal backlog** from the bootstrap, not evidence that any task is
 | P0-06 | Validate prototype mechanics and scope | Head approves a small vertical-slice brief |
 | MVP-01 | Plot ownership and secure claim | Unauthorized claims rejected |
 | MVP-02 | Server-authoritative reward/currency | Client cannot grant itself currency |
-| MVP-03 | Disaster Containment proof: Stabilize vs Snatch, one living tiny Disaster reaction, and one Warden chase | Solo Studio test shows a meaningful, fair difference between capture choices; no random unavoidable loss |
+| MVP-03 | **Containment Crate proof:** random tier spawn, Stabilize vs Snatch, one unstable-crate escape reaction and Warden chase, return-to-base opening and randomized **same-tier** tiny Disaster | Solo Studio test proves two fair escape choices and a base-only one-time reveal; 2-player/disconnect cases cannot duplicate/re-roll rewards |
 | MVP-04 | First-minute onboarding and mobile controls | New player can perform first action |
 | MVP-05 | Steal/protect rules | Server rejects invalid and spam requests |
 | MVP-06 | Inventory save/load | Rejoin test passes with safe test data |

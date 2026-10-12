@@ -1,6 +1,6 @@
 # Roblox Create
 
-Minimal Rojo + Luau starter for a three-person Roblox development team. The game title **Steal a Disaster** is provisional. There is no playable game in the repository yet.
+Minimal Rojo + Luau starter for a three-person Roblox development team. The game title **Steal a Disaster** is provisional. There is a Studio-only first-playable source prototype, but no Roblox Studio-verified or published game yet.
 
 ## Team
 All three people collaborate in [NutthakitPatike/Steal-a-Disaster-](https://github.com/NutthakitPatike/Steal-a-Disaster-) through personal GitHub accounts, feature branches and reviewed pull requests. The **Head** uses **ChatGPT + lnwjud MCP** and approves releases; two teammates use **Codex**. Teammates may also edit assigned zones/models in Roblox Studio, then export the change into Git. See [docs/TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md) and [docs/STUDIO_MCP.md](docs/STUDIO_MCP.md).
@@ -32,7 +32,8 @@ Use a new task-specific branch name instead of `feat/zone1-greybox` when working
 - `src/client/Bootstrap.client.luau`: client-side startup message.
 - `src/shared/Config.luau`: working title and prototype version.
 - `default.project.json`: maps source folders into ServerScriptService, StarterPlayerScripts and ReplicatedStorage using Rojo.
-- 3D Workspace/maps are not managed by the current Rojo configuration.
+- The five-Zone original map is generated at **runtime inside Roblox Studio** from `src/server/ZoneMap.luau` and `src/server/PrototypeWorld.luau` using Roblox Parts, not imported from Steal An Egg. No permanent Studio geometry is tracked yet.
+- The server prototype in `src/server/TornadoTownPrototype.server.luau` has one Warden/crate per test Zone and memory-only base reveal; see [five-Zone test runbook](docs/PROTOTYPE_RUNBOOK.md).
 - `rokit.toml`: declares Rojo, Selene, StyLua and Wally versions. Declared does not mean installed.
 
 ## Set up each development computer
@@ -43,7 +44,11 @@ Use a new task-specific branch name instead of `feat/zone1-greybox` when working
 5. Run `rojo serve default.project.json` and connect the Rojo plugin in a **local test place**, not a production place.
 6. Check tools with `stylua --check src`, `selene src` and `rojo build default.project.json -o build/prototype.rbxlx`.
 
-The commands above are the intended workflow. **They have not passed on the inspected Head machine:** Rokit, Rojo, Selene and StyLua were not in PATH on 2026-10-12. Do not claim a valid game build until the commands run.
+The commands above are the intended team workflow. On 2026-10-13, temporary standalone **Rojo 7.6.1 and StyLua 2.3.1** were used on the Head's machine to build/parse the Studio-only map; they are not installed globally in PATH. See [CURRENT_STATE.md](CURRENT_STATE.md) for actual results. Do not equate a successful Rojo build with passing Studio gameplay tests.
+
+## Try the five-Zone source prototype
+
+Run `rojo build default.project.json -o build/five-zones.rbxlx`, then open the generated local file in Roblox Studio and press Play. The original themed map and crate/Warden tests are **Studio-only**, and the [test runbook](docs/PROTOTYPE_RUNBOOK.md) records the missing solo/2-player/mobile verification. The Steal An Egg `.rbxlx` geometry was not copied or imported: only generalized layout/progression ideas informed an independently generated map.
 
 ## Studio MCP and skill setup
 See [docs/STUDIO_MCP.md](docs/STUDIO_MCP.md) for ChatGPT/lnwjud and Codex routes. Available local skill names include pstack's `poteto-mode`, `ponytail`, and task-specific `roblox-*`; [AGENTS.md](AGENTS.md) defines when to use them. Each contributor must check their own setup. Do not copy third-party plugin code into Git.

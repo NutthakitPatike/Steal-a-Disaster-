@@ -44,7 +44,7 @@ local function makeText(name, y, height, size, color)
     return txt
 end
 local title = makeText("Header", 8, 22, 16, Color3.fromRGB(146, 224, 237))
-title.Text = "TORNADO TOWN  |  STUDIO TEST"
+title.Text = "STEAL A DISASTER! | 5-ZONE TEST"
 local money = makeText("Money", 35, 23, 15)
 local speed = makeText("Speed", 60, 23, 15)
 local crate = makeText("Crate", 85, 23, 15)
@@ -59,7 +59,8 @@ instructions.TextColor3 = Color3.new(1, 1, 1)
 instructions.TextSize = 14
 instructions.Font = Enum.Font.Gotham
 instructions.TextWrapped = true
-instructions.Text = "Train at the blue stand → collect a crate in Zone 1 → escape the Warden → open at YOUR assigned base"
+instructions.Text =
+    "Train Speed to unlock Zones 1–5 → collect any Zone crate → escape its Warden → return and open at YOUR base"
 instructions.Parent = gui
 local helpCorner = Instance.new("UICorner")
 helpCorner.CornerRadius = UDim.new(0, 10)
@@ -86,10 +87,32 @@ local function refresh()
     speed.Text = "Speed Power: " .. tostring(player:GetAttribute("SpeedPower") or 0)
     local status = player:GetAttribute("CarryStatus") or "Empty"
     local tier = player:GetAttribute("CarryingTier") or ""
-    crate.Text = "Crate: " .. (status == "Empty" and "None" or (tier .. " / " .. status))
-    index.Text = "Zone 1 | Index discovered: " .. tostring(player:GetAttribute("IndexCount") or 0)
+    crate.Text = "Crate: "
+        .. (
+            status == "Empty" and "None"
+            or (
+                "Zone "
+                .. tostring(player:GetAttribute("CarryingZone") or 0)
+                .. " / "
+                .. tier
+                .. " / "
+                .. status
+            )
+        )
+    index.Text = "Unlocked Zone: "
+        .. tostring(player:GetAttribute("HighestZone") or 1)
+        .. "/5 | Index: "
+        .. tostring(player:GetAttribute("IndexCount") or 0)
 end
-for _, attribute in ipairs({ "ChaosCoins", "SpeedPower", "CarryStatus", "CarryingTier", "IndexCount" }) do
+for _, attribute in ipairs({
+    "ChaosCoins",
+    "SpeedPower",
+    "HighestZone",
+    "CarryStatus",
+    "CarryingTier",
+    "CarryingZone",
+    "IndexCount",
+}) do
     player:GetAttributeChangedSignal(attribute):Connect(refresh)
 end
 refresh()

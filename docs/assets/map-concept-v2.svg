@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1120" width="1200" height="1120" role="img" aria-labelledby="title desc">
+<title id="title">Steal a Disaster — Map Concept v2, linear Zone progression</title>
+<desc id="desc">The original seven-bay horizontal hub at the bottom connects to a long single forward route through launch Zones 1–5, then future Zones 6–7. A Secret Crate Admin Abuse spawn example occurs inside Zone 2; expansion continues forward rather than branching. Dimensions are not to scale.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#101a2f"/><stop offset="1" stop-color="#101627"/></linearGradient>
+ <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#6eddd4"/></marker>
+ <style>
+ .title{font:700 27px 'Segoe UI',Arial,sans-serif;fill:#ecf6ff}
+ .major{font:700 20px 'Segoe UI',Arial,sans-serif;fill:#ecf6ff}
+ .medium{font:650 15px 'Segoe UI',Arial,sans-serif;fill:#e8f5ff}
+ .small{font:500 13px 'Segoe UI',Arial,sans-serif;fill:#c4d5e8}
+ .tiny{font:500 11px 'Segoe UI',Arial,sans-serif;fill:#b8cadd}
+ .step{stroke:#6eddd4;stroke-width:5;fill:none;marker-end:url(#arr);stroke-linecap:round}
+ </style>
+</defs>
+<rect width="1200" height="1120" fill="url(#bg)"/>
+<text x="50" y="51" class="title">STEAL A DISASTER!</text>
+<text x="50" y="79" class="small">MAP CONCEPT V2 · LONG LINEAR PROGRESSION · TEAM REVIEW</text>
+<rect x="945" y="31" width="203" height="44" rx="19" fill="#25344d" stroke="#708aa7"/>
+<text x="1046" y="58" class="small" text-anchor="middle">NOT TO SCALE</text>
+
+<!-- Zone continuation: endless additions above current content -->
+<rect x="315" y="114" width="572" height="99" rx="15" fill="#394467" fill-opacity=".5" stroke="#8fa5e5" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="601" y="151" class="major" text-anchor="middle">ZONE 4 + ZONE 5 · LAUNCH</text>
+<text x="601" y="174" class="small" text-anchor="middle">More zones beyond: 6–7 (future)</text>
+<text x="601" y="193" class="tiny" text-anchor="middle">See Zone Roadmap · no fixed dates</text>
+<path d="M601 248 V216" class="step"/>
+
+<!-- Zone 3 not built -->
+<rect x="315" y="258" width="572" height="136" rx="16" fill="#334866" fill-opacity=".65" stroke="#809ed0" stroke-width="2" stroke-dasharray="8 5"/>
+<text x="601" y="288" class="major" text-anchor="middle">ZONE 3 · VOLCANIC RUINS</text>
+<text x="601" y="311" class="small" text-anchor="middle">Launch target · volcano / lava theme</text>
+<rect x="405" y="330" width="160" height="39" rx="8" fill="#314a68" stroke="#7592c5"/>
+<text x="485" y="354" class="small" text-anchor="middle">Crate Pool</text>
+<rect x="640" y="330" width="160" height="39" rx="8" fill="#314a68" stroke="#7592c5"/>
+<text x="720" y="354" class="small" text-anchor="middle">Warden Variant</text>
+<path d="M601 430 V399" class="step"/>
+
+<!-- Zone 2 active concept -->
+<rect x="269" y="446" width="664" height="216" rx="18" fill="#3b3457" fill-opacity=".78" stroke="#b29de3" stroke-width="3"/>
+<text x="601" y="478" class="major" text-anchor="middle">ZONE 2 · TSUNAMI COAST</text>
+<text x="601" y="501" class="small" text-anchor="middle">Reached by continuing straight beyond Zone 1</text>
+<rect x="311" y="524" width="189" height="84" rx="11" fill="#414c6e" stroke="#a6b8ed" stroke-width="2"/>
+<text x="405" y="548" class="medium" text-anchor="middle">Crate Spawn</text>
+<text x="405" y="568" class="small" text-anchor="middle">Visible rarity</text>
+<text x="405" y="588" class="tiny" text-anchor="middle">Normal gameplay</text>
+<rect x="523" y="524" width="156" height="84" rx="11" fill="#693a51" stroke="#e7a5be" stroke-width="2"/>
+<text x="601" y="549" class="medium" text-anchor="middle">Warden</text>
+<text x="601" y="569" class="small" text-anchor="middle">Zone 2</text>
+<text x="601" y="588" class="tiny" text-anchor="middle">New variant</text>
+<rect x="702" y="524" width="190" height="84" rx="11" fill="#69482b" stroke="#eac17c" stroke-width="3"/>
+<text x="797" y="545" class="medium" text-anchor="middle">ADMIN ABUSE</text>
+<text x="797" y="567" class="small" text-anchor="middle">/spawn Secret Crate</text>
+<text x="797" y="588" class="tiny" text-anchor="middle">Target: Zone 2</text>
+<path d="M932 555 H1034" stroke="#ecc486" stroke-width="2.5" stroke-dasharray="7 5"/>
+<rect x="1022" y="512" width="147" height="87" rx="10" fill="#55422e" stroke="#ddb26d"/>
+<text x="1096" y="537" class="small" text-anchor="middle">Update Event</text>
+<text x="1096" y="559" class="tiny" text-anchor="middle">Broadcast</text>
+<text x="1096" y="576" class="tiny" text-anchor="middle">Giveaways</text>
+<text x="601" y="636" class="small" text-anchor="middle">Escape/secure crate → return to own base to open</text>
+<path d="M601 695 V665" class="step"/>
+
+<!-- Zone 1 starter -->
+<rect x="269" y="710" width="664" height="186" rx="18" fill="#184d50" fill-opacity=".76" stroke="#5dc8b5" stroke-width="3"/>
+<text x="601" y="744" class="major" text-anchor="middle">ZONE 1 · TORNADO TOWN</text>
+<text x="601" y="764" class="small" text-anchor="middle">Prototype + launch · 1 Warden · crate spawn candidates</text>
+<rect x="308" y="781" width="178" height="75" rx="10" fill="#2b6872" stroke="#8de0d8"/>
+<text x="397" y="808" class="medium" text-anchor="middle">Crate Spawn A</text>
+<text x="397" y="832" class="small" text-anchor="middle">Optional Route A</text>
+<rect x="514" y="781" width="174" height="75" rx="10" fill="#693e4d" stroke="#e2a2a6"/>
+<text x="601" y="809" class="medium" text-anchor="middle">Warden</text>
+<text x="601" y="831" class="small" text-anchor="middle">Chase test</text>
+<rect x="715" y="781" width="178" height="75" rx="10" fill="#2b6872" stroke="#8de0d8"/>
+<text x="804" y="808" class="medium" text-anchor="middle">Crate Spawn B</text>
+<text x="804" y="832" class="small" text-anchor="middle">Optional Route B</text>
+<rect x="518" y="865" width="166" height="24" rx="7" fill="#396f58" stroke="#9ce5b9"/>
+<text x="601" y="882" class="small" text-anchor="middle">Safe Return Gate</text>
+<path d="M601 928 V897" class="step"/>
+<text x="619" y="922" class="tiny">Long main corridor</text>
+<!-- Hub -->
+<rect x="44" y="939" width="1114" height="137" rx="16" fill="#273b59" stroke="#829ec4" stroke-width="3"/>
+<text x="601" y="961" class="medium" text-anchor="middle">ORIGINAL HORIZONTAL HUB SHAPE · SEVEN UNASSIGNED BAYS</text>
+<g font-family="Segoe UI,Arial" text-anchor="middle">
+<rect x="63" y="977" width="139" height="77" rx="9" fill="#3a5271" stroke="#95b2d5"/><text x="132" y="1006" class="medium">BAY 1</text><text x="132" y="1028" class="tiny">TBD</text>
+<rect x="218" y="977" width="139" height="77" rx="9" fill="#3a5271" stroke="#95b2d5"/><text x="287" y="1006" class="medium">BAY 2</text><text x="287" y="1028" class="tiny">TBD</text>
+<rect x="373" y="977" width="139" height="77" rx="9" fill="#3a5271" stroke="#95b2d5"/><text x="442" y="1006" class="medium">BAY 3</text><text x="442" y="1028" class="tiny">TBD</text>
+<rect x="528" y="977" width="139" height="77" rx="9" fill="#526e65" stroke="#a2dcc7" stroke-width="2"/><text x="597" y="1004" class="medium">CENTRAL</text><text x="597" y="1027" class="tiny">Hub? (proposed)</text>
+<rect x="683" y="977" width="139" height="77" rx="9" fill="#3a5271" stroke="#95b2d5"/><text x="752" y="1006" class="medium">BAY 5</text><text x="752" y="1028" class="tiny">TBD</text>
+<rect x="838" y="977" width="139" height="77" rx="9" fill="#3a5271" stroke="#95b2d5"/><text x="907" y="1006" class="medium">BAY 6</text><text x="907" y="1028" class="tiny">TBD</text>
+<rect x="993" y="977" width="139" height="77" rx="9" fill="#3a5271" stroke="#95b2d5"/><text x="1062" y="1006" class="medium">BAY 7</text><text x="1062" y="1028" class="tiny">TBD</text>
+</g>
+<text x="601" y="1095" text-anchor="middle" class="small">Launch: Zones 1–5, then future: 6–7. Global event crates spawn inside the chosen Zone.</text>
+</svg>

@@ -1,0 +1,9 @@
+"use strict";
+const {test}=require("node:test"), assert=require("node:assert/strict"), fs=require("node:fs"), path=require("node:path");
+const read=(p)=>fs.readFileSync(path.join(__dirname,"..",p),"utf8");
+const server=read("src/server/TornadoTownPrototype.server.luau"), world=read("src/server/PrototypeWorld.luau"), client=read("src/client/TornadoTownHUD.client.luau"), config=read("src/shared/PrototypeConfig.luau");
+test("Studio only, memory only",()=>{assert.match(server,/not RunService:IsStudio\(\)/);assert.match(client,/not RunService:IsStudio\(\)/);assert.doesNotMatch(server+world+client+config,/DataStoreService|SetAsync|UpdateAsync|GetAsync/);});
+test("no duplicate claims/open grants, server owns reward",()=>{assert.match(server,/crate.claimed = true\s+activeCrate = nil/);assert.match(server,/profile.plotSlot ~= slot/);assert.match(server,/occupiedPlots\[slot\] ~= player.UserId/);assert.match(server,/carry.status ~= "Secured"/);assert.match(server,/profile.carry = nil\s+if carry.visual then/);assert.match(server,/Config.Rewards\[carry.tier\]/);assert.doesNotMatch(client,/FireServer\(/);});
+test("capture risk without changed loot odds",()=>{assert.match(server,/name = "Stabilize", seconds = 2.0/);assert.match(server,/name = "Snatch", seconds = 0.0/);assert.match(server,/carry.method == "Snatch"/);assert.doesNotMatch(server,/Config.Rewards\[carry.method\]/);});
+test("connected floors, base station, one Warden",()=>{assert.match(world,/"SafeExit"/);assert.match(world,/"Warden"/);assert.match(world,/"CrateOpener" \.\. slot/);assert.match(world,/Vector3.new\(44, 2, 112\)/);assert.match(world,/Vector3.new\(118, 2, 190\)/);});
+test("no premature Secret event implementation",()=>{assert.doesNotMatch(config,/Secret =/);assert.doesNotMatch(server,/MessagingService|PublishAsync/);});

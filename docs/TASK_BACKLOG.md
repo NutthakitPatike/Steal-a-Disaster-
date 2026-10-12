@@ -19,7 +19,7 @@ This is a **proposal backlog** from the bootstrap, not evidence that any task is
 | MVP-06 | Inventory save/load | Rejoin test passes with safe test data |
 | MVP-07 | Performance and player feedback | Real playtest evidence available |
 | LIVE-01 | Modular Warden variant configs and testing hooks for frequent updates | New Warden behavior can be configured/tested without rewriting base capture logic |
-| LIVE-02 | Special Crate Spawn/event announcement system | Authorized event spawns display correct rarity, use validated drops, and cannot duplicate rewards |
+| LIVE-02 | **Global Event Spawn** targeting a Zone across all servers (not a per-player Spawn Event Boost) | Authorized global event produces one independently validated target-Zone event spawn per eligible server; event ID/expiry, duplicate prevention, new-server catch-up, broadcast and odds are tested |
 | LIVE-03 | Weekly update/release checklist and controlled Admin Abuse + giveaway plan | Announcement, authority, limits, logging, staging tests and Head publish approval documented |
 | LATER-01 | Data-driven Disaster Synergy and Duplicate Progression | Proposed combinations and duplicate value paths reviewed; economy caps decided before code |
 

@@ -10,7 +10,7 @@ This is a **proposal backlog** from the bootstrap, not evidence that any task is
 | P0-04 | Public GitHub repository and `main` seeded **DONE**; invite 2 collaborators and configure mandatory PR/review branch rules **PENDING** | Each of 3 accounts can push a branch; a reviewed PR can merge; direct main pushes are blocked |
 | P0-05 | Create a safe staging place and backup procedure | Team can test and restore it |
 | P0-06 | Validate prototype mechanics and scope | Head approves a small vertical-slice brief |
-| MAP-01 | Review [linear Map Concept v2](MAP_CONCEPT.md) with Head + 2 teammates before Studio implementation | **Sequential Zone 1 → Zone 2 → ... confirmed**; seven start-area Bays assigned after review; return-route safety, in-Zone Admin Abuse spawn and Zone 1 escape tested/planned; Head approves greybox scope |
+| MAP-01 | Review [linear Map Concept v2](MAP_CONCEPT.md) and the [five-Zone launch roadmap](ZONE_ROADMAP.md) with the Head and 2 teammates | **5 launch Zones (1–5) targeted**, Zone 6/7 deferred; seven hub Bays assigned after review; Zone 1 greybox, long-distance return, Warden boundaries and in-Zone Global Admin Abuse reviewed |
 | MVP-01 | Plot ownership and secure claim | Unauthorized claims rejected |
 | MVP-02 | Server-authoritative reward/currency | Client cannot grant itself currency |
 | MVP-03 | **Containment Crate proof:** random tier spawn, Stabilize vs Snatch, one unstable-crate escape reaction and Warden chase, return-to-base opening and randomized **same-tier** tiny Disaster | Solo Studio test proves two fair escape choices and a base-only one-time reveal; 2-player/disconnect cases cannot duplicate/re-roll rewards |
@@ -18,6 +18,10 @@ This is a **proposal backlog** from the bootstrap, not evidence that any task is
 | MVP-05 | Steal/protect rules | Server rejects invalid and spam requests |
 | MVP-06 | Inventory save/load | Rejoin test passes with safe test data |
 | MVP-07 | Performance and player feedback | Real playtest evidence available |
+| ZONE-01 | Complete **Tornado Town** Zone 1 prototype before copying the Zone architecture | Solo/mobile capture → escape → own-base opening loop tested; Zone template validated |
+| ZONE-02 | Expand tested template to **Tsunami Coast, Volcanic Ruins** (internal beta) | Shared Warden system, distinct themes/hazards and tested linear routes |
+| ZONE-03 | Finish **Thunderstorm City, Inferno Forest** for five-Zone launch target | All five Zones functional, not empty scenery; return path, performance and accessible difficulty verified |
+| LATER-02 | Reserve **Frozen Catastrophe (6)** and **Apocalypse Zone (7)** | Major post-launch updates only, not required in initial public launch |
 | LIVE-01 | Modular Warden variant configs and testing hooks for frequent updates | New Warden behavior can be configured/tested without rewriting base capture logic |
 | LIVE-02 | **Global Event Spawn** targeting a Zone across all servers (not a per-player Spawn Event Boost) | Authorized global event produces one independently validated target-Zone event spawn per eligible server; event ID/expiry, duplicate prevention, new-server catch-up, broadcast and odds are tested |
 | LIVE-03 | Weekly update/release checklist and controlled Admin Abuse + giveaway plan | Announcement, authority, limits, logging, staging tests and Head publish approval documented |

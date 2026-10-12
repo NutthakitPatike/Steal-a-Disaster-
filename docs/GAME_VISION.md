@@ -1,4 +1,4 @@
-# Steal a Disaster! — Game Design v0.6 (approved feature and weekly live-ops direction, prototype pending)
+# Steal a Disaster! — Game Design v0.7 (five launch Zones targeted; prototype pending)
 
 **Confirmed by the Head (2026-10-13):** Direction A (living collectible Disaster characters), **Disaster Containment** (choose **Stabilize** or **Snatch**), and **Containment Crates instead of eggs**. A crate of a randomly spawned rarity is obtained in an NPC-guarded Zone, carried back through an escape, then opened **at the player's base** to randomly reveal a Disaster from that crate's rarity pool. For instance, a Secret crate can reveal different Secret Disasters, from less desirable to exceptional—not automatically the best Secret. The crate can signal instability and affect the escape before the hidden character is revealed. **Approved at concept level, not implemented or playtested.** Exact crate tiers, odds, species, timing, spawn rates, map size, title and launch scope remain to be designed and tested. This document is the project design source of truth; do not create a second PROJECT_SPEC.md.
 
@@ -20,7 +20,7 @@ The previous v0.2 draft overemphasized rival-base stealing and omitted important
 
 **Working title:** Steal a Disaster! (provisional). Target experience: a mobile-friendly social Roblox collection game with meaningful action even when nobody else joins the server.
 
-**Player fantasy:** "Spot a rare Containment Crate in a dangerous Zone, choose how to secure it, escape the Warden while the crate behaves unpredictably, and open it back at your base to discover which living Disaster you earned." Start with **tiny, approachable weather creatures**; reserve volcanic, oceanic, planetary and cosmic themes for future updates.
+**Player fantasy:** "Spot a rare Containment Crate in a dangerous Zone, choose how to secure it, escape the Warden while the crate behaves unpredictably, and open it back at your base to discover which living Disaster you earned." Start with **tiny, approachable Disaster characters**; the five-Zone launch target already includes tornado, tsunami, volcano, thunderstorm and wildfire themes. Frozen and apocalypse themes are reserved for later updates. See [ZONE_ROADMAP.md](ZONE_ROADMAP.md).
 
 **Approved core hook, still to validate with playtests:** **spawned crate rarity + reveal within that rarity + reactive escape**. The player chooses **Stabilize** (slower, safer containment) or **Snatch** (faster, less stable containment) at a guarded crate. A carried crate has readable signals (shaking, light, sound or short environmental effects) that affect an escape choice without revealing the hidden reward. Effects must be telegraphed and counterable—not an unavoidable random loss. **Capture method does not change the reward odds by default**; its purpose is an escape-risk tradeoff, unless the Head explicitly revises it. Rival-base theft remains the secondary social loop. No claim is made that competing games lack similar mechanics.
 
@@ -58,16 +58,13 @@ Different crate skins (Volcano, Tsunami, Cosmic), mutations, limited Disaster sp
 
 **Fairness and trust:** publish clear rarity/loot information in game; no bait-and-switch tier promises. Spawn/reveal resolution, crate identity, ownership, opening and rewards must be **server authoritative**, with exactly-once grants and safe rejoin handling. Do not let reconnects reroll the same crate or let client requests assign contents. Stabilize/Snatch should affect escape risk, **not secretly manipulate loot odds**.
 
-### Starter creatures (proposals, not the complete tier table)
+### Launch Zone roster and starter creatures
 
-Four initial **placeholder** species, two per Zone in the previous draft; the actual launch Zone and rarity pools are still undecided. Names are original proposals; no reference-game meshes or animations are authorized for reuse.
+**Head-confirmed target: open with five connected Zones** — **Tornado Town → Tsunami Coast → Volcanic Ruins → Thunderstorm City → Inferno Forest**. **Frozen Catastrophe (6)** and **Apocalypse Zone (7)** are reserved for post-launch major updates. [ZONE_ROADMAP.md](ZONE_ROADMAP.md) records each theme, scope discipline and build gates. The superseded example Zone names **Breezy Fields** and **Static Ridge** are **not** part of the current launch naming plan.
 
-| Zone | Creatures | Play identity |
-| --- | --- | --- |
-| **Breezy Fields** | Breezy (mini tornado), Drizzle (tiny rain cloud) | Tiny, friendly starter rewards; distinctive swirl/splash **after reveal** |
-| **Static Ridge** | Zappy (lightning cloud), Pebble Meteor (glowing meteor) | Higher-tier placeholder rewards; sparks/weight animation **after reveal** |
+Specific collectible Disaster species, stats, rarities, per-Zone Warden mechanics and hazards remain **proposals**. An early estimate is roughly **3–4 identifiable Disasters per Zone**, **one Warden** and **one clear interaction/hazard** per Zone, subject to team review and performance testing. Thematic boss names from earlier concept pictures are **not required for launch**. Do not copy source-game meshes or animations.
 
-**Implementation scope:** one reusable crate spawn/carry/escape/open pipeline; one or two starter crate tiers and a small server-configured reward pool for the first prototype (tier count is a **test proposal**); revealed Disaster idle expressions and base earning configs. Hidden characters need not be spawned or visually identified during carry. Creature ownership and reveal are server authoritative; cosmetic reactions can be client rendered.
+**Implementation scope:** one reusable crate spawn/carry/escape/open pipeline; one or two starter crate tiers and a small server-configured reward pool for the **Zone 1 prototype** (tier count is a test proposal); revealed Disaster idle expressions and base earning configs. Hidden characters need not be spawned or visually identified during carry. Creature ownership and reveal are server authoritative; cosmetic reactions can be client rendered.
 
 **Avoid double punishment and loot spoilers:** the Warden is the primary threat. During carry, the **crate** shows telegraphed, manageable instability (sparks, wind leaks, brief route changes), without leaking the final hidden character. Stabilize and Snatch modify this risk, not the tier/pool by default. The old v0.2 mandatory `Calm` prompt remains deferred until testing shows it is fun.
 
@@ -96,7 +93,7 @@ The revised [Map Concept v2](MAP_CONCEPT.md) and [top-down SVG](assets/map-conce
 
 **Admin Abuse occurs inside existing Zones:** e.g. on the Zone 2 update, an authorized admin may `/spawn Secret Crate Zone 2`, announce the special crate, and run giveaways. This is an **event concept**, not finalized command syntax, spawn odds, quantity, permission model or economy.
 
-**Still subject to Head and teammate review:** the original seven rectangles' function/base count, whether the central Bay is a hub, exact corridor distances, Safe Exit and return-to-base approach as the world grows, Zone unlock rules and event accessibility. The first greybox should still be only Zone 1. Do not invent dimensions or build permanent geometry until approved.
+**Still subject to Head and teammate review:** the original seven rectangles' function/base count, whether the central Bay is a hub, exact corridor distances, Safe Exit and return-to-base approach as the world grows, Zone unlock rules and event accessibility. The **public launch target is five connected Zones**, but the **first greybox should still be only Zone 1 (Tornado Town)**, and subsequent Zones must earn their place through QA rather than becoming empty decorative shells. See [Zone Roadmap](ZONE_ROADMAP.md). Do not invent dimensions or build permanent geometry until approved.
 
 ## 7. Onboarding and UI
 
@@ -163,7 +160,7 @@ The Head reviewed five ideas and set the following priorities. These are **desig
 - Decide actual crate tier names, spawn tables, loot odds, sample species and duplicate handling. The **Secret crate → different Secret outcomes** is the approved example, with no probabilities defined.
 - Confirm Stabilize/Snatch durations, instability effects, Warden counterplay, handling of held/unopened crates on rejoin, and whether to defer the extra `Calm` prompt. Test them rather than guessing.
 - Confirm whether PvP stealing should ship in the first public beta; it remains part of the longer game vision.
-- Confirm when Zone 2 is added to the **long sequential corridor** after the Zone 1 prototype; exact initial catalog and Zone counts beyond the first test remain open.
+- **Confirmed target:** five playable connected Zones at public launch, with **Tornado Town (1) → Tsunami Coast (2) → Volcanic Ruins (3) → Thunderstorm City (4) → Inferno Forest (5)**; Frozen Catastrophe (6) and Apocalypse Zone (7) are reserved for future updates. Validate the scope with a one-Zone prototype then up to three-Zone beta before producing all five. Specific collectible counts and balancing remain open.
 - Decide final visual theme, name, group ownership, publisher rights and economy balancing after actual prototypes.
 
 The **core direction is approved**; specific feature thresholds and implementation scope remain provisional until a first playable test. This is **not working gameplay** or a claim that full competitor server code was obtained. Verified implementation status remains [CURRENT_STATE.md](../CURRENT_STATE.md).

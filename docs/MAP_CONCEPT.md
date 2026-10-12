@@ -1,6 +1,6 @@
 # Steal a Disaster! — Map Concept v2: Continuous Linear Zones (TEAM REVIEW)
 
-**Status:** The Head explicitly confirmed on 2026-10-13 that Zones extend in a **single long sequence: Zone 1 → Zone 2 → Zone 3 → ...**. This supersedes the old v1 proposal for west/east branch portals, a separate event plaza and a bounded two-Zone layout. The precise hub arrangement, base count, dimensions and safe-return mechanics are **not yet approved**. This is **design only**, not a Roblox Studio build.
+**Status:** The Head explicitly confirmed on 2026-10-13 that Zones extend in a **single long sequence: Zone 1 → Zone 2 → Zone 3 → ...**, with a **five-Zone public launch target**; see [Zone Roadmap](ZONE_ROADMAP.md). This supersedes the old v1 proposal for west/east branch portals, a separate event plaza and a bounded two-Zone layout. The precise hub arrangement, base count, dimensions and safe-return mechanics are **not yet approved**. This is **design only**, not a Roblox Studio build.
 
 ![Map Concept v2 top-down](assets/map-concept-v2.svg)
 
@@ -13,27 +13,31 @@
 **Retained from the user's original sketch:** a wide horizontal starting area with **seven internal rectangles** and a narrow upward-running route from the center. **The seven rectangles have never been confirmed to mean seven player plots.** Bay labels 1–7 remain placeholders; placing training/Index/Trail Shop in the center Bay is a **proposal**, not a confirmed instruction.
 
 ```text
-                ...  new Zones keep extending upward
-                             |
-                          [ZONE 4+]
-                             |
-                     [ZONE 3 (future)]
-                             |
-              [ZONE 2: crates + Warden]
-                  [EVENT: admin /spawn]
-                             |
-               [ZONE 1: starter crates]
-                   [Warden + 2 routes]
-                             |
-                       [SAFE RETURN]
-                             |
-                 [LONG MAIN ACCESS]
-                             |
+       [ZONE 7 Apocalypse Zone]        FUTURE MAJOR UPDATE
+                    |
+       [ZONE 6 Frozen Catastrophe]     FUTURE MAJOR UPDATE
+                    |
+       [ZONE 5 Inferno Forest]         LAUNCH TARGET
+                    |
+       [ZONE 4 Thunderstorm City]      LAUNCH TARGET
+                    |
+       [ZONE 3 Volcanic Ruins]         LAUNCH TARGET
+                    |
+       [ZONE 2 Tsunami Coast]          LAUNCH TARGET
+       [Global event crate in Zone 2]
+                    |
+       [ZONE 1 Tornado Town]           LAUNCH TARGET / PROTOTYPE
+       [Warden + two suggested escape routes]
+                    |
+             [SAFE RETURN]
+                    |
+            [LONG MAIN ACCESS]
+                    |
    [B1] [B2] [B3] [CENTRAL?] [B5] [B6] [B7]
-             wide horizontal initial area
+        seven unassigned starting-area bays
 ```
 
-The diagram reads bottom-to-top from the Hub; each new Zone continues the same **forward corridor**. Its exact length, terrain, entrances, exit checkpoints and geometry require Studio greybox tests. The first prototype still only needs **one actual Zone**, not a fully built Zone 2+.
+The diagram reads bottom-to-top from the Hub; each new Zone continues the same **forward corridor**. Its exact length, terrain, entrances, exit checkpoints and geometry require Studio greybox tests. The first prototype still only needs **one actual Zone (Tornado Town)**; the agreed **public launch target** is five completed Zones in the same long corridor, after staged tests. The SVG is a **route concept only**; [Zone Roadmap](ZONE_ROADMAP.md) is authoritative for which of Zones 1–5 target launch and which of Zones 6–7 are future updates.
 
 ## 2. Zone segments and expansion contract
 
@@ -41,9 +45,12 @@ The diagram reads bottom-to-top from the Hub; each new Zone continues the same *
 | --- | --- | --- |
 | Horizontal start area and seven Bays | Original user sketch, **Bay function unconfirmed** | Player bases, training and services to be assigned **after Head review**. Every base needs its own crate-opening station. |
 | Central upward route | **Confirmed linear direction** | A legible corridor from the initial area into Zone 1, then **Zone 2 directly beyond it**, then subsequent Zones in order. |
-| Zone 1 — Tiny Weather | First playable scope; detailed design **proposed** | Easy initial crate spawns, one Warden, experimental Stabilize/Snatch, optional two escape paths and a readable safe exit. |
-| Zone 2 | **Future segment example, not implemented** | Continues beyond Zone 1, can contain higher-tier crates and a different Warden config. Its content, title and entry requirements are undecided. |
-| Zone 3+ | **Expansion direction confirmed** | Add further segments to the end of the route without remaking Zones 1/2 or the starting Hub. No fixed number of Zones or guaranteed Zone-per-week policy. |
+| Zone 1 — **Tornado Town** | **Prototype and launch target** | Easy starter crate spawns, one Warden, experimental Stabilize/Snatch, optional two escape paths and a readable safe exit. |
+| Zone 2 — **Tsunami Coast** | **Launch target**, not implemented | Connects after Zone 1; water-themed obstacles and separate crate pool; exact difficulty/entry requirements open. |
+| Zone 3 — **Volcanic Ruins** | **Launch target**, not implemented | Further along corridor, volcanic theme; no mandatory launch boss. |
+| Zone 4 — **Thunderstorm City** | **Launch target**, not implemented | Further along corridor, lightning theme; not merely a reskin of Zone 1. |
+| Zone 5 — **Inferno Forest** | **Launch target / initial endgame**, not implemented | Fire-spread forest distinct from Zone 3's lava; playable zone and return path required. |
+| Zones 6–7 — **Frozen Catastrophe / Apocalypse Zone** | **Post-launch major updates**, not implemented | Extend the same route only when production capacity and player experience justify it. No mandated new Zone each week. |
 | Admin Abuse / Special Crate Spawn | **GLOBAL, in-zone event direction confirmed** | An authorized **global** spawn event targets Zone 2 (example Secret Crate): **each active server** creates its own event crate at an approved Zone 2 node with an announcement. No isolated Event Plaza, no player-specific Spawn Event Boost, and no one shared cross-server crate. |
 | Long-distance return assistance | **Design question** | Decide whether later Zones use a safe return lane, checkpoints, unlockable shortcuts or transport. Preserve the forward line of Zones while avoiding frustrating trips back to the player's own base. Nothing chosen yet. |
 
@@ -80,7 +87,7 @@ No actual privileged commands are implemented or authorized for live use by this
 
 - One wide starting footprint and **one temporary test plot** with a crate opener; do not assign all seven Bays.
 - One long central access path and **Zone 1 only**, with one Warden, candidate crate spawn points, two optional escape routes and one clear safe return boundary.
-- A **placeholder forward connection** to future Zone 2, without detailed Zone 2 terrain/art.
+- A **placeholder forward connection** to planned launch Zone 2 — **Tsunami Coast** — without detailed Zone 2 terrain/art yet.
 - Test a full run: take visible-tier crate → escape → return along the linear route → open at the player's own base. Check solo/mobile and Warden reset.
 - Confirm the performance and travel/return time before deciding the distance between Zones, adding a Zone 2 segment or adopting any shortcut mechanism.
 - Review how to place an **in-zone Secret crate event spawn marker** in Zone 2 when that Zone is actually implemented; don't stage a production admin-giveaway system inside the greybox.
@@ -98,7 +105,7 @@ Do **not** build west/east portal wings or a dedicated Event Plaza based on the 
 
 ## 7. Documents and tasks
 
-- [Game Vision v0.6](GAME_VISION.md) — agreed gameplay mechanics, tiers and weekly Admin Abuse direction
+- [Game Vision v0.7](GAME_VISION.md) and [Zone Roadmap](ZONE_ROADMAP.md) — agreed gameplay direction and five-Zone launch target
 - [Zone 1 map task — Issue #3](https://github.com/NutthakitPatike/Steal-a-Disaster-/issues/3)
 - [Weekly events and giveaway design — Issue #7](https://github.com/NutthakitPatike/Steal-a-Disaster-/issues/7)
 

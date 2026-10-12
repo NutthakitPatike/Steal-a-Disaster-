@@ -2,9 +2,9 @@
 
 **Status:** The Head explicitly confirmed on 2026-10-13 that Zones extend in a **single long sequence: Zone 1 → Zone 2 → Zone 3 → ...**. This supersedes the old v1 proposal for west/east branch portals, a separate event plaza and a bounded two-Zone layout. The precise hub arrangement, base count, dimensions and safe-return mechanics are **not yet approved**. This is **design only**, not a Roblox Studio build.
 
-![Map Concept v2 top-down](assets/map-concept-v1.svg)
+![Map Concept v2 top-down](assets/map-concept-v2.svg)
 
-[Open the full-sized SVG](assets/map-concept-v1.svg) — the SVG filename remains `map-concept-v1.svg` on this review branch to update PR #8 in place; the **contents are v2** and may be renamed after approval.
+[Open the full-sized SVG](assets/map-concept-v2.svg) — the diagram matches the Head-confirmed long sequential Zone layout.
 
 ## 1. Layout direction — confirmed vs proposed
 

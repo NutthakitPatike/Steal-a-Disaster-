@@ -92,7 +92,7 @@ The Head's original black-and-white sketch shows **one wide horizontal hub area 
 
 **Head-confirmed map direction (2026-10-13):** a **single long, connected progression**: **Zone 1 → Zone 2 → Zone 3 → ...**, with future Zones appended in sequence. The previous side-branch Future Zone Junction and separate Event Plaza are **superseded**.
 
-The revised [Map Concept v2](MAP_CONCEPT.md) and [top-down SVG](assets/map-concept-v1.svg) preserve the wide initial seven-Bay silhouette and upward corridor. Zone 1 is the first test; Zone 2 follows directly beyond it; later Zones continue **along the same physical route**. Each Zone may have its own crate pool and Warden variant. Within a Zone, alternative escape routes may be tested without branching the overall progression.
+The revised [Map Concept v2](MAP_CONCEPT.md) and [top-down SVG](assets/map-concept-v2.svg) preserve the wide initial seven-Bay silhouette and upward corridor. Zone 1 is the first test; Zone 2 follows directly beyond it; later Zones continue **along the same physical route**. Each Zone may have its own crate pool and Warden variant. Within a Zone, alternative escape routes may be tested without branching the overall progression.
 
 **Admin Abuse occurs inside existing Zones:** e.g. on the Zone 2 update, an authorized admin may `/spawn Secret Crate Zone 2`, announce the special crate, and run giveaways. This is an **event concept**, not finalized command syntax, spawn odds, quantity, permission model or economy.
 

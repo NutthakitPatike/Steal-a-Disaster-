@@ -1,77 +1,105 @@
-# Steal a Disaster! — Map Concept v1 (TEAM REVIEW DRAFT)
+# Steal a Disaster! — Map Concept v2: Continuous Linear Zones (TEAM REVIEW)
 
-**Status:** PROPOSAL ONLY. Top-down layout for the 3-person team's review; no Studio greybox, implementation, plot count, distances or art style approved by the Head yet. [Game Design v0.6](GAME_VISION.md) remains the approved mechanic source of truth.
+**Status:** The Head explicitly confirmed on 2026-10-13 that Zones extend in a **single long sequence: Zone 1 → Zone 2 → Zone 3 → ...**. This supersedes the old v1 proposal for west/east branch portals, a separate event plaza and a bounded two-Zone layout. The precise hub arrangement, base count, dimensions and safe-return mechanics are **not yet approved**. This is **design only**, not a Roblox Studio build.
 
-![Map Concept v1 — top-down](assets/map-concept-v1.svg)
+![Map Concept v2 top-down](assets/map-concept-v1.svg)
 
-[Open the map as an SVG](assets/map-concept-v1.svg) · SVG labels are **English for easy team review**, but player-facing language/UI are undecided. Diagram is **not to scale**.
+[Open the full-sized SVG](assets/map-concept-v1.svg) — the SVG filename remains `map-concept-v1.svg` on this review branch to update PR #8 in place; the **contents are v2** and may be renamed after approval.
 
-## 1. Preserve the Head's original sketch without inventing its labels
+## 1. Layout direction — confirmed vs proposed
 
-The original sketch shows a **wide horizontal main footprint divided into seven internal rectangles** and a **long narrow connection going upward from around its center**. Its rectangles were **not confirmed to be seven player bases**. This draft **preserves the silhouette only** and labels seven footprints **Bay 1–7 as unassigned placeholders**. The **middle Bay 4 as Central Hub** is a **design proposal**, not an interpretation confirmed by the Head. Other bay roles, size and number of player plots remain open. Earlier prose suggesting exactly six plots is **superseded as an unapproved illustration**.
+**Confirmed by Head:** One long, continuous route extends forward through **Zone 1 → Zone 2 → Zone 3 → ...**, with newer Zones appended at the far end as they are released. Players can progress through the world physically along that sequence. **Do not turn this into a branching Zone selection lobby/portal network.**
 
-The upward connection is a clear **return/access lane** to the Zone. A **separate Event Plaza** and a **Future Zone Junction** branch sideways off this connection so events, future content and portal updates do **not** block the core route. A future Zone does not have to be entered via the dangerous Zone 1.
+**Retained from the user's original sketch:** a wide horizontal starting area with **seven internal rectangles** and a narrow upward-running route from the center. **The seven rectangles have never been confirmed to mean seven player plots.** Bay labels 1–7 remain placeholders; placing training/Index/Trail Shop in the center Bay is a **proposal**, not a confirmed instruction.
 
-## 2. Proposed spatial contracts
+```text
+                ...  new Zones keep extending upward
+                             |
+                          [ZONE 4+]
+                             |
+                     [ZONE 3 (future)]
+                             |
+              [ZONE 2: crates + Warden]
+                  [EVENT: admin /spawn]
+                             |
+               [ZONE 1: starter crates]
+                   [Warden + 2 routes]
+                             |
+                       [SAFE RETURN]
+                             |
+                 [LONG MAIN ACCESS]
+                             |
+   [B1] [B2] [B3] [CENTRAL?] [B5] [B6] [B7]
+             wide horizontal initial area
+```
 
-| Area | Spatial role | Why it belongs here | Ownership/status |
-| --- | --- | --- | --- |
-| **Seven horizontal Bays** | Reserved footprints in the original wide hub silhouette | Hold candidate base plots, services or future space *after* review | **Unassigned**. Never assume six/seven bases; prototype one test plot only. |
-| **Central Hub (proposed Bay 4)** | Spawn navigation, training, Trail Shop, Index, next goal/Zone indicators | Player can see a clear way to the first crate and return without walking a giant lobby | **Proposed**; choose actual kiosk locations after greybox. |
-| **Own-plot Crate Opening** | Station **inside the assigned player's own base** | Explicitly preserves approved two-stage random reward loop | **Approved functional requirement**; exact physical plot locations open. |
-| **Upward Access Lane** | Connect hub to Zone access/safe return; signposted travel | Follows the original vertical path and makes orientation obvious | Shape proposed; width/length not measured. |
-| **Zone 1: Tiny Weather** | First crate Zone with visible spawn rarity and **one Warden** | Test the approved capture/escape/reveal loop without shipping an entire world | First **playable** scope; specific styling provisional. |
-| **Escape Routes A + B** | Two understandable routes around Warden cover/patrol toward Safe Exit | Make Stabilize/Snatch and unstable crates produce readable choices, not automatic failure | Proposed for greybox; check actual line-of-sight and fairness. |
-| **Safe Exit** | Clear checkpoint where Warden pursuit ends and crate is secured for return | Avoid unfair pursuit into bases; reset NPC cleanly | Functional boundary proposed; exact server rules require test. |
-| **Event Plaza** | Reusable Admin Abuse stage, broadcast/giveaway visuals, possible special crate events | Weekly content can rotate without demolishing the hub or interfering with ordinary training/escape | Space reservation only; admin actions/rewards not coded. |
-| **Future Zone Junction + wings** | Independent portal/gate slots for branching later Zones | Weekly updates and future expansions attach as modules, not a forever-long straight corridor | **Reserved footprint only**; no premature Zone content. |
+The diagram reads bottom-to-top from the Hub; each new Zone continues the same **forward corridor**. Its exact length, terrain, entrances, exit checkpoints and geometry require Studio greybox tests. The first prototype still only needs **one actual Zone**, not a fully built Zone 2+.
 
-**Base access and PvP (not first playable):** once Bays are assigned, a player's return path must reach their **own** base opening station without walking through another player's plot. Base stealing/protection mechanics remain later-stage decisions.
+## 2. Zone segments and expansion contract
 
-## 3. Zone 1: moment-to-moment route
-
-1. **Spawn and orient:** a new player starts near the chosen base/test plot, sees the Hub objective, trains minimally if necessary and follows clear navigation toward Zone 1.
-2. **Find a crate:** a server-configured spawn node selects a **visibly identified crate tier**; multiple *candidate nodes* may exist, but actual simultaneously active spawn count is undecided. The first experience should not require long wandering or random waiting.
-3. **Capture:** player approaches the guarded crate and chooses **Stabilize** or **Snatch**. Avoid making a cramped choke point the only place to interact.
-4. **Escape:** the Warden warns/chases. Routes **A** and **B** provide navigable cover/options; a single experimental crate-instability cue can alter route planning with a readable counterplay.
-5. **Secure:** crossing the Safe Exit stops/resets the Warden using server-validated state. A crate that is not yet secured can be lost when legitimately caught; exact loss/recovery rules remain to test.
-6. **Return and reveal:** player takes the **secured crate into their own base** (not an Event Plaza opening), opens it **exactly once** and receives one random Disaster from the **same tier pool**. Assign/discover and place for progression.
-
-**Travel feel to test, not invented timings:** first-time orientation, time to first crate, escape duration, safe return, and base-opening time. Keep zone-1 starter path accessible without paid upgrades. The previous onboarding 0–90s guidance in Game Vision is aspirational, not a geometric measurement.
-
-## 4. Fairness, access and map boundaries
-
-- **No forced Warden trap:** routes must be meaningfully different and give escape counterplay. The Safe Exit must not be a one-person bottleneck that the Warden can camp. Test mobile camera/readability, movement speeds and line of sight.
-- **No reward-spoil during escape:** crate rarity is visible but the actual Disaster is hidden until opened **at base**. Escape effects communicate instability without giving away the final rolled creature.
-- **Event safety:** special crate announcements/spawns should be clear and optional; ordinary players must retain access to base, training and Zone 1 while Admin Abuse runs. Event rewards and admin authority are separate gameplay/server design decisions.
-- **Performance:** use one Warden in first prototype; cap active NPCs/FX and event decorations. Streaming, navmesh/pathfinding and mobile-device draw costs must be evaluated in Studio.
-- **Expandable ownership:** plan module folders/IDs per Zone, Gate, Bay and Event area. Do not hard-wire all world destinations into one Script or physically extend the only narrow corridor on each weekly update.
-- **No exact map metrics invented:** lengths, widths, heights, spawn chances, Warden speed/detection, escape duration, number of players/bases, portal destinations and lighting/art budget remain **TBD**.
-
-## 5. Suggested Roblox Studio greybox slices (NOT APPROVED FOR BUILD)
-
-| Slice | Blockout only | Evidence required before proceeding |
+| Component | Status | Design intent |
 | --- | --- | --- |
-| **A — First playtest** | Central navigation hub, **one temporary player plot with base crate opener**, vertical access, Zone 1, candidate crate spawn, Warden, two escape paths, Safe Exit | First-time solo player can complete an actual secured-crate return/open cycle; NPC doesn't get stuck; both routes and both capture modes are usable on keyboard and mobile. |
-| **B — Confirm the horizontal Bays** | Assign final plot/service count *only after Head interprets seven sketch rectangles*; refine entry distances and plot openings | Team accepts plot ownership, unobstructed access and adequate social space. |
-| **C — Release expansion interfaces** | Add inactive Event Plaza and Future Zone Junction/portal anchors; only then build approved event mechanics/content | Event navigation never blocks base or Zone return, performance budget measured, authorized Admin Abuse remains controlled. |
+| Horizontal start area and seven Bays | Original user sketch, **Bay function unconfirmed** | Player bases, training and services to be assigned **after Head review**. Every base needs its own crate-opening station. |
+| Central upward route | **Confirmed linear direction** | A legible corridor from the initial area into Zone 1, then **Zone 2 directly beyond it**, then subsequent Zones in order. |
+| Zone 1 — Tiny Weather | First playable scope; detailed design **proposed** | Easy initial crate spawns, one Warden, experimental Stabilize/Snatch, optional two escape paths and a readable safe exit. |
+| Zone 2 | **Future segment example, not implemented** | Continues beyond Zone 1, can contain higher-tier crates and a different Warden config. Its content, title and entry requirements are undecided. |
+| Zone 3+ | **Expansion direction confirmed** | Add further segments to the end of the route without remaking Zones 1/2 or the starting Hub. No fixed number of Zones or guaranteed Zone-per-week policy. |
+| Admin Abuse / Special Crate Spawn | **In-zone event direction confirmed** | On an update/event an authorized admin may `/spawn Secret Crate Zone 2` (example), creating a visible Secret crate at a permitted spawn node **inside Zone 2**, with optional announcement and giveaway. Does **not** require a separate Event Plaza. |
+| Long-distance return assistance | **Design question** | Decide whether later Zones use a safe return lane, checkpoints, unlockable shortcuts or transport. Preserve the forward line of Zones while avoiding frustrating trips back to the player's own base. Nothing chosen yet. |
 
-**No Roblox Studio changes** or assets are included in this Map Concept PR. The illustration and text are design references only, **not** exact 3D models or geometry.
+**Per-Zone implementation proposal:** Each new `ZoneId` has data-defined forward/back access anchors, spawn node IDs, crate rarity pool, Warden variants, signage and optional event spawn nodes. A **zone append** changes only the next segment plus configs; it should not need to restructure the main base/hub or copy the full crate-opening system.
 
-## 6. Questions for three-person review
+## 3. Real player experience (core design retained)
 
-1. **Head:** What do the original sketch's **seven rectangles** represent? Are they player plots, mixed spaces, or another plan? Is **Bay 4 as Central Hub** acceptable?
-2. **All three:** Is the main access/return lane too long or restrictive? Should it branch nearer the Hub or use direct portal/shortcuts as the game expands?
-3. **All three:** Are two escape choices in Zone 1 meaningful, and can the Warden pursue fairly without camping the Safe Exit?
-4. **All three:** Is the Event Plaza sufficiently independent for weekly Admin Abuse and special crate spawns, without reducing ordinary players' access?
-5. **Studio/map owner:** What is the minimum performance-safe greybox and where should Zone, paths and bay anchors live? Record test evidence, not guessed map units.
-6. **Head:** After the team reviews this plan, approve/revise the map **before** assigning Issue #3 as a Roblox Studio implementation task.
+1. At a plot/base, the player can train Speed Power and see the next Zone requirement (exact gating still undecided).
+2. The player proceeds **through Zones in world order** to the currently reachable Zone. A crate of visible rarity spawns at a candidate position and an NPC Warden guards it.
+3. The player chooses **Stabilize** (slower, lower escape instability) or **Snatch** (fast, more instability); Warden chase and the crate's telegraphed effect create an escape decision.
+4. A captured crate is **not revealed in the Zone**. The player must escape and return to **their own base** to open it and get one random Disaster from that crate rarity pool.
+5. Special event crate spawns occur **in a specified existing Zone**; a Secret Crate in Zone 2 is the Head's example. Their spawn and reward values are not yet decided.
 
-## 7. Related work
+**Prototype requirement:** Confirm that Zone 1 can be completed easily by a new player and the route home is readable. Do not force an overlong walk, an unavoidable guard trap or a single campable choke point.
 
-- **Approved gameplay direction:** [GAME_VISION.md](GAME_VISION.md), v0.6.
-- **Prototype implementation planning:** [GitHub Issue #4](https://github.com/NutthakitPatike/Steal-a-Disaster-/issues/4).
-- **Zone 1 design/greybox ownership:** [GitHub Issue #3](https://github.com/NutthakitPatike/Steal-a-Disaster-/issues/3).
-- **Weekly events and Admin Abuse:** [GitHub Issue #7](https://github.com/NutthakitPatike/Steal-a-Disaster-/issues/7).
+## 4. Weekly updates and in-zone Admin Abuse
 
-**Change policy:** this file is a map-review proposal, not an accepted production map. The Head confirms or revises layout decisions after teammate review; gameplay implementation and Roblox live publishing require separate approval.
+**Confirmed direction:** Target one game update each week, and organize engaging developer-led **Admin Abuse** sessions with giveaways / controlled special spawns. A new Zone may be a major update theme; weekly updates do **not automatically require a new Zone**.
+
+**Example from Head:** When a new Zone 2 update arrives, an authorized admin can spawn a **Secret Crate in Zone 2** and potentially give rewards to players. This is an illustration of an event targeting a particular Zone, **not** a finalized command parser, rarity percentage, spawn interval or giveaway economy.
+
+A safe design should support:
+- **Zone-targeted event commands/config:** e.g. request a specified crate tier at an approved spawn location in a specific `ZoneId`, with visible broadcast and event metadata.
+- **Server-enforced authority and caps:** Only approved staff may invoke in-zone event spawns/grants; log the actor, Zone, item/tier, time, quantities, expiry and outcome. Reject invalid/locked Zone ids and unbounded rewards.
+- **Player experience:** A special spawn must be recognizable and fair to reach. If an event targets Zone 2, decide how players who have not unlocked it can participate, if at all; this is still an **open design decision**.
+- **World stability:** Admin Abuse should not block the ordinary linear route, trap players, invalidate existing crates or bypass anti-duplication/economy protections.
+- **Weekly content operations:** Release/new segment when ready → staging QA → Head publish approval → broadcast event/new crate spawns/giveaways → monitor economy/latency. No guarantee that a brand-new Zone ships every week.
+
+No actual privileged commands are implemented or authorized for live use by this map document.
+
+## 5. Greybox scope and acceptance
+
+**Not yet authorized to implement.** After Head and teammate review, Stage A is proposed as a small local/staging-place test:
+
+- One wide starting footprint and **one temporary test plot** with a crate opener; do not assign all seven Bays.
+- One long central access path and **Zone 1 only**, with one Warden, candidate crate spawn points, two optional escape routes and one clear safe return boundary.
+- A **placeholder forward connection** to future Zone 2, without detailed Zone 2 terrain/art.
+- Test a full run: take visible-tier crate → escape → return along the linear route → open at the player's own base. Check solo/mobile and Warden reset.
+- Confirm the performance and travel/return time before deciding the distance between Zones, adding a Zone 2 segment or adopting any shortcut mechanism.
+- Review how to place an **in-zone Secret crate event spawn marker** in Zone 2 when that Zone is actually implemented; don't stage a production admin-giveaway system inside the greybox.
+
+Do **not** build west/east portal wings or a dedicated Event Plaza based on the superseded Map Concept v1.
+
+## 6. Decisions still to review with three-person team
+
+1. **Head:** What are the seven rectangles in the starting area meant to represent, and should the middle one contain training/services?
+2. **All:** As the corridor length grows, what is a fair way to return valuable crates to your own base without skipping the actual Warden escape?
+3. **All:** How do Zone requirements and safe entry/exit boundaries work when Zones connect directly and a player carries a crate back through earlier territory?
+4. **All:** How should an update's **Zone 2 Secret Crate** event communicate availability, and can lower-progress players join the event?
+5. **Map teammate:** Evaluate two escape route shapes **inside each Zone**, rather than adding unrelated world branches.
+6. **Head:** Approve/revise this linear layout before building any live Studio map.
+
+## 7. Documents and tasks
+
+- [Game Vision v0.6](GAME_VISION.md) — agreed gameplay mechanics, tiers and weekly Admin Abuse direction
+- [Zone 1 map task — Issue #3](https://github.com/NutthakitPatike/Steal-a-Disaster-/issues/3)
+- [Weekly events and giveaway design — Issue #7](https://github.com/NutthakitPatike/Steal-a-Disaster-/issues/7)
+
+**Change control:** This v2 corrects the Map Concept v1 PR rather than approving a real Studio map. It preserves only confirmed direction and marks remaining choices for team review.

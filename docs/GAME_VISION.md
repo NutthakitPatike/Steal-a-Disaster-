@@ -86,17 +86,17 @@ Each capture Zone spawns **Containment Crates** with visible tiers from its data
 
 **Fairness:** guard behavior should be readable and independently testable; never guarantee a catch or arbitrary instant kill. Zone 1 allows initial success with starter Speed Power and small Disaster rewards. Higher Zones scale through both Warden behavior and crate pools. Guard pursuit is server authoritative; use limited NPC count, bounded pathfinding and a clear safe zone. Spawn rates, reward odds, speed thresholds, escape times and chase ranges are **UNKNOWN pending design/playtesting**.
 
-## 6. Map layout — [Map Concept v1 for team review](MAP_CONCEPT.md)
+## 6. Map layout — [Linear Map Concept v2 for team review](MAP_CONCEPT.md)
 
 The Head's original black-and-white sketch shows **one wide horizontal hub area with seven internal rectangular footprints** and **a narrow upward connector**. What these seven rectangles represent has **not been confirmed**. The previous "six player plots / two Zones in fixed positions" illustration was a **draft assumption, not approved map topology**.
 
-The [proposed top-down Map Concept v1](MAP_CONCEPT.md) and its [editable SVG overview](assets/map-concept-v1.svg) keep the wide seven-Bay footprint with one central upward return path while reserving:
-- a suggested central Hub for training, Index and Trail Shop;
-- a small **Zone 1** with crate spawn candidates, one Warden, **two escape routes** and a clear Safe Exit;
-- an **opening station within the player's own base** after returning with the secured crate;
-- an optional, separate weekly **Event Plaza** for Admin Abuse/special spawns and a **Future Zone Junction** for branching expansion without forcing every trip through Zone 1.
+**Head-confirmed map direction (2026-10-13):** a **single long, connected progression**: **Zone 1 → Zone 2 → Zone 3 → ...**, with future Zones appended in sequence. The previous side-branch Future Zone Junction and separate Event Plaza are **superseded**.
 
-**Status: design proposal pending Head + two teammates' review.** Do not conclude there are seven player bases or build a permanent layout from the sketch's unlabeled boxes. No exact dimensions, player plot count, Zone 2 location or Warden escape distances are fixed. Keep beginner travel short, retain a clean Safe Exit, and validate the proposed two routes and mobile usability in a **test greybox only after concept approval**.
+The revised [Map Concept v2](MAP_CONCEPT.md) and [top-down SVG](assets/map-concept-v1.svg) preserve the wide initial seven-Bay silhouette and upward corridor. Zone 1 is the first test; Zone 2 follows directly beyond it; later Zones continue **along the same physical route**. Each Zone may have its own crate pool and Warden variant. Within a Zone, alternative escape routes may be tested without branching the overall progression.
+
+**Admin Abuse occurs inside existing Zones:** e.g. on the Zone 2 update, an authorized admin may `/spawn Secret Crate Zone 2`, announce the special crate, and run giveaways. This is an **event concept**, not finalized command syntax, spawn odds, quantity, permission model or economy.
+
+**Still subject to Head and teammate review:** the original seven rectangles' function/base count, whether the central Bay is a hub, exact corridor distances, Safe Exit and return-to-base approach as the world grows, Zone unlock rules and event accessibility. The first greybox should still be only Zone 1. Do not invent dimensions or build permanent geometry until approved.
 
 ## 7. Onboarding and UI
 
@@ -141,7 +141,7 @@ The Head reviewed five ideas and set the following priorities. These are **desig
 - Use a **data-driven event calendar/config** for weekly crate tables, NPC variants and limited rewards; don't hardcode a new parallel system each week.
 - Admin actions must be **server authorized and permission-gated**, with rate limits, audit logs, bounded duration, safe disable/rollback and clear separation between test/staging and production. Do not expose grant/spawn remotes to clients.
 - Event giveaways should not silently devalue rare crate tiers, skip all meaningful progression or allow farming/duplication. Consider cosmetics, bounded bonuses and transparent limited rewards first; keep normal players able to participate.
-- Reserve a **reusable event/spawn area** in the expandable map/hub. Confirm the actual layout with the two teammates before building.
+- Reserve **controlled Admin Abuse spawn nodes within each relevant Zone** (e.g. Secret Crate inside Zone 2 when the new Zone is celebrated), not a separate Event Plaza. Confirm player access, permitted Zone targets and the map layout with teammates before building.
 - Check mobile performance, NPC pathing, server load and save safety in staging before every public event/update.
 
 **Release process:** Prepare content → teammate review + server validation → staging playtest → announce weekly release/event → Head approves publish → monitor errors/economy → document follow-up. This is a **target workflow**, not a deployed automation or event.
@@ -161,7 +161,7 @@ The Head reviewed five ideas and set the following priorities. These are **desig
 - Decide actual crate tier names, spawn tables, loot odds, sample species and duplicate handling. The **Secret crate → different Secret outcomes** is the approved example, with no probabilities defined.
 - Confirm Stabilize/Snatch durations, instability effects, Warden counterplay, handling of held/unopened crates on rejoin, and whether to defer the extra `Calm` prompt. Test them rather than guessing.
 - Confirm whether PvP stealing should ship in the first public beta; it remains part of the longer game vision.
-- Confirm two capture zones and a minimal four-creature catalog for the prototype.
+- Confirm when Zone 2 is added to the **long sequential corridor** after the Zone 1 prototype; exact initial catalog and Zone counts beyond the first test remain open.
 - Decide final visual theme, name, group ownership, publisher rights and economy balancing after actual prototypes.
 
 The **core direction is approved**; specific feature thresholds and implementation scope remain provisional until a first playable test. This is **not working gameplay** or a claim that full competitor server code was obtained. Verified implementation status remains [CURRENT_STATE.md](../CURRENT_STATE.md).

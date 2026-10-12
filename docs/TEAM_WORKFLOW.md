@@ -48,7 +48,7 @@ Each teammate should fill the placeholders for their own assignment; do **not** 
 3. Read [../AGENTS.md](../AGENTS.md) and the relevant source. Use pstack for complex work and ponytail for minimal implementation **if installed in that runtime**.
 4. Run applicable checks. Involve Roblox Studio for gameplay/runtime evidence.
 5. Push the branch to `origin` and open a PR against `main` with changed files, behavior, tests, risks and Studio export/snapshot links as needed. Another person reviews. A team member with Write access may merge after the relevant approval(s) and checks pass. Use `squash` for a small feature PR unless preserving multiple commits materially helps.
-6. After merge, everyone pulls the latest `main` before starting or integrating further work. Do not push directly to `main`; use the PR flow even when GitHub rules are not yet enforced.
+6. After merge, everyone pulls the latest `main` before starting or integrating further work. Do not push directly to `main`; use the PR flow even when GitHub rules are not yet enforced. **One-time exception:** the Head seeded the originally empty GitHub `main` from the local bootstrap project on 2026-10-13, before team reviews were available.
 
 ## Handoff (one short message or PR comment)
 ```text

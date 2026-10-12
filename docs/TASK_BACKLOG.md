@@ -1,13 +1,13 @@
 # Planned work (not a project status log)
 
-This is a **proposal backlog** from the bootstrap, not evidence that any task is complete. Verified progress lives only in [../CURRENT_STATE.md](../CURRENT_STATE.md). Move tasks to GitHub Issues when a shared remote exists.
+This is a **proposal backlog** from the bootstrap, not evidence that any task is complete. Verified progress lives only in [../CURRENT_STATE.md](../CURRENT_STATE.md). Create and track new active tasks through GitHub Issues now that `main` exists; these rows are an initial backlog, not assigned work.
 
 | ID | Proposed work | Acceptance evidence |
 | --- | --- | --- |
 | P0-01 | Install Rokit toolchain on each machine | Each computer can run its tool commands |
 | P0-02 | Check Rojo sync and build | A local test place shows expected Bootstrap logs |
 | P0-03 | Check ChatGPT/lnwjud Studio access and Codex Studio MCP access separately | Each required client inspects the correct test place |
-| P0-04 | Connect the existing GitHub repository (currently PUBLIC), decide visibility, invite 2 collaborators, seed `main` and configure reviewed PRs | Each of 3 accounts can push a branch; a reviewed PR can merge; main is not directly pushed |
+| P0-04 | Public GitHub repository and `main` seeded **DONE**; invite 2 collaborators and configure mandatory PR/review branch rules **PENDING** | Each of 3 accounts can push a branch; a reviewed PR can merge; direct main pushes are blocked |
 | P0-05 | Create a safe staging place and backup procedure | Team can test and restore it |
 | P0-06 | Validate prototype mechanics and scope | Head approves a small vertical-slice brief |
 | MVP-01 | Plot ownership and secure claim | Unauthorized claims rejected |

@@ -25,7 +25,7 @@ Use a new task-specific branch name instead of `feat/zone1-greybox` when working
 
 **Different AIs are fine:** GitHub, source-controlled instructions, a named task owner and a verified PR are the common contract. We do not require identical Codex/ChatGPT tools, private AI chat memory or matching skill installations. See [docs/TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md) for a copyable task brief and [docs/STUDIO_MCP.md](docs/STUDIO_MCP.md) for Studio work.
 
-**Current blocker:** GitHub is still **public and empty**, while source/docs are on the Head machine. The steps above become usable after `main` is pushed and collaborators are invited.
+**Repository status (2026-10-13):** `main` is seeded on the **public** GitHub repository. The two teammate invitations and GitHub-enforced `main` protection still need configuring; only the Head currently has verified access. Teammates should wait for their own GitHub Write access before pushing.
 
 ## Verified structure
 - `src/server/Bootstrap.server.luau`: server-side startup message.

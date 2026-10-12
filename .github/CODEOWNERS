@@ -1,0 +1,7 @@
+# Shared interfaces and product direction require Head review.
+# Routine feature branches elsewhere can be approved by another teammate.
+/AGENTS.md @NutthakitPatike
+/docs/GAME_VISION.md @NutthakitPatike
+/docs/DECISIONS.md @NutthakitPatike
+/default.project.json @NutthakitPatike
+/src/shared/ @NutthakitPatike

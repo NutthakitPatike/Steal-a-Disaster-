@@ -1,0 +1,49 @@
+name: Team task
+description: Track one testable task for our three-person Roblox team
+title: "[Task] "
+labels: []
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal / player outcome
+      description: What should players or developers be able to do?
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: Human owner (GitHub username)
+      description: Exactly one accountable teammate; assistants are not task owners
+      placeholder: "@username"
+    validations:
+      required: true
+  - type: textarea
+    id: paths
+    attributes:
+      label: Allowed files / Studio zone
+      description: List what this task can edit and which areas it must leave alone
+      placeholder: "src/server/Containment/ or studio/exports/zone1.rbxmx"
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Acceptance tests / evidence
+      description: Include Studio test place, mobile or multiplayer checks if needed
+    validations:
+      required: true
+  - type: input
+    id: reviewer
+    attributes:
+      label: Reviewer
+      placeholder: "@other-teammate"
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Dependencies / existing code / risks
+      description: Reference related PRs and shared contracts; never paste secrets
+    validations:
+      required: false

@@ -1,4 +1,4 @@
-# Steal a Disaster! — Game Design v0.5 (approved Containment Crates, prototype rules pending)
+# Steal a Disaster! — Game Design v0.6 (approved feature and weekly live-ops direction, prototype pending)
 
 **Confirmed by the Head (2026-10-13):** Direction A (living collectible Disaster characters), **Disaster Containment** (choose **Stabilize** or **Snatch**), and **Containment Crates instead of eggs**. A crate of a randomly spawned rarity is obtained in an NPC-guarded Zone, carried back through an escape, then opened **at the player's base** to randomly reveal a Disaster from that crate's rarity pool. For instance, a Secret crate can reveal different Secret Disasters, from less desirable to exceptional—not automatically the best Secret. The crate can signal instability and affect the escape before the hidden character is revealed. **Approved at concept level, not implemented or playtested.** Exact crate tiers, odds, species, timing, spawn rates, map size, title and launch scope remain to be designed and tested. This document is the project design source of truth; do not create a second PROJECT_SPEC.md.
 
@@ -30,8 +30,8 @@ The previous v0.2 draft overemphasized rival-base stealing and omitted important
 ### Secondary social loop (later, proposed)
 `View rare character in another base → attempt steal → owner alerted → escape and deposit OR be reclaimed`
 
-### Longer-term (not MVP)
-Different crate skins (Volcano, Tsunami, Cosmic), mutations, special limited Disaster species, community events, additional Zone branches, cosmetics and creator-driven short clips. Build rarity pools and Zone content as **data-driven additions**, without remaking the hub, bases or crate-opening logic. Do not implement features based only on competitors having them.
+### Longer-term and recurring content (not all MVP)
+Different crate skins (Volcano, Tsunami, Cosmic), mutations, limited Disaster species, **approved Special Crate Spawns, modular Warden variants, Disaster Synergy and Duplicate Progression**, weekly updates and recurring **Admin Abuse** events/giveaways. Build rarity pools, NPC modules and event configurations as **data-driven additions**, without remaking the hub, bases or crate-opening logic. Timing, rewards and feature scope still need review; see Section 8A.
 
 ## 3. Progression systems that work together
 
@@ -122,6 +122,33 @@ Minimal HUD: Coins, Speed Power, **current crate rarity + instability**, Zone In
 | **3 — Social/beta safety** | Controlled rival-base stealing and recovery only if Stage 1–2 tests justify it; persistence, server-side anti-duplication, mobile/performance and telemetry checks | Two-player raid/defense works; disconnect/rejoin safe; no duplication |
 
 **Not in initial MVP:** large rarity ladder or Secret jackpot economy, full destructive disasters, complex creature AI, multiple guards per Zone, long quests, weather simulation, trading, rebirth, premium monetization, large events and third-party art/code imports. **Secret crate with lower/higher Secret outcomes is a confirmed design example, not a requirement to launch with Secret content.**
+
+## 8A. Approved feature direction and weekly live operations (2026-10-13)
+
+The Head reviewed five ideas and set the following priorities. These are **design approvals**, not shipped mechanics, measured retention claims or a promise that all five belong in the first playable MVP.
+
+| Feature | Head decision | Design/rollout boundary |
+| --- | --- | --- |
+| **Crate Instability** | **Try first** | Prototype one telegraphed, fair crate effect during the Warden escape; retain, revise or discard based on player tests. Stabilize/Snatch modifies escape behavior, **not hidden loot odds** by default. |
+| **Warden variants** | **Should be developed and extended** | Architect Guards as modular configurations/behaviors so future weekly releases can add or change chase encounters. Avoid demanding a brand-new NPC model every week if balancing or polish would be better. |
+| **Special Crate Spawn** | **Should exist** | Rare or event crates may spawn with a clear server-wide warning and a time-limited competition opportunity. Keep tier messaging, spawn control, ownership and rewards server authoritative. |
+| **Disaster Synergy** | **Good direction** | Support data-defined combinations of displayed Disasters (e.g., Tornado + Lightning visual synergy) and possibly balanced effects later. Do **not** require full synergy mechanics for the first prototype. |
+| **Duplicate Progression** | **Good direction** | A duplicate Disaster should remain useful (research, collection mastery or controlled progression). Exact conversion rates, fusion rules and upgrades are **not decided**. |
+
+### Weekly update and Admin Abuse direction
+
+**Confirmed product cadence target:** aim for **one game update per week**, with ongoing live-event/contents improvements. Each weekly release should offer a noticeable reason to return—e.g., new crate/Disaster pool, Warden encounter, new event interaction, cosmetics, collection goals or balance/quality fixes. A new Zone is **not required** every week. Actual deployment day/hour, staffing, first release date, content quantity and schedule guarantees remain **undecided**.
+
+**Confirmed event direction:** stage lively **Admin Abuse** sessions and worthwhile giveaways/handouts as recurring live operations. The event is an **announced, controlled developer-run experience**, not permission for arbitrary moderators to change player data. Possible event activities to test: temporary special crate spawns, unusual Warden behavior, global visual/weather moments, community reward drops and time-limited cosmetic collectibles. Which rewards are claimable, their supply, eligibility, caps and odds are **not decided**.
+
+**Technical and economy guardrails (proposal pending implementation review):**
+- Use a **data-driven event calendar/config** for weekly crate tables, NPC variants and limited rewards; don't hardcode a new parallel system each week.
+- Admin actions must be **server authorized and permission-gated**, with rate limits, audit logs, bounded duration, safe disable/rollback and clear separation between test/staging and production. Do not expose grant/spawn remotes to clients.
+- Event giveaways should not silently devalue rare crate tiers, skip all meaningful progression or allow farming/duplication. Consider cosmetics, bounded bonuses and transparent limited rewards first; keep normal players able to participate.
+- Reserve a **reusable event/spawn area** in the expandable map/hub. Confirm the actual layout with the two teammates before building.
+- Check mobile performance, NPC pathing, server load and save safety in staging before every public event/update.
+
+**Release process:** Prepare content → teammate review + server validation → staging playtest → announce weekly release/event → Head approves publish → monitor errors/economy → document follow-up. This is a **target workflow**, not a deployed automation or event.
 
 ## 9. Validation
 

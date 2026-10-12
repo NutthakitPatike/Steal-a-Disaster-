@@ -1,28 +1,24 @@
-# Five-zone original map — Studio-only test
+# Studio test — saved editable five-Zone map
 
-This branch replaces the **one-Zone greybox map** with five **newly generated** themed Zone layouts, *inspired by the continuous progression structure* of Steal An Egg but **not a copy of its geometry, models, code or visuals**. The original `Place_107778070777162.rbxlx` map was **not available in this project**, so no claim of pixel/geometry fidelity is made. All art is authored as original low-cost geometric placeholders from Roblox Parts.
+**Open the file studio/places/StealADisaster_EggLayout_Static.rbxlx directly in Roblox Studio.** This is a permanent 3D scene visible and editable in Workspace **without Play**. Seven fenced test bases, five sequential Zones, grassy/checkered ground, canyon boundary walls, crate-nest positions, zone guardian markers and props are saved as Parts/Models. The original third-party Steal An Egg place was not imported. See MAP_ASSET.md.
 
-### Single connected map
-Hub / temporary six test bases → **Tornado Town** → **Tsunami Coast** → **Volcanic Ruins** → **Thunderstorm City** → **Inferno Forest**. No Zone portals or detached event plaza. A pale return shoulder on the right is continuous to the hub; secured crate carriers get **30 WalkSpeed (temporary test balance)** to shorten the return while keeping physical travel. Future Zones 6/7 are not built.
+## Visual inspection
 
-### Each Zone in the test
-- One distinct environment: pastel buildings/tornado, water/lighthouse, basalt/lava, dark city/electric signs, forest/embers. **Visual sculptures only**, not damaging weather simulations.
-- One separately spawning Common/Rare Containment Crate with **Stabilize** or **Snatch** capture choice and its **own** placeholder Warden.
-- Server checks required **Speed Power: 0, 40, 120, 230, 350**, respectively (test thresholds, not finalized economics).
-- Run past that Zone's green exit, carry a **Secured** crate back to the player's assigned base, and reveal a Disaster from **that Zone's tier pool** (2 Common / 2 Rare placeholder rewards per Zone).
-- Server-owned claims, inventory/Coins/Index are **memory-only**. All progress resets on rejoin; no production DataStore writes.
+1. Open the saved Place, and stay in Edit mode. In Explorer expand Workspace → DisasterFiveZonePrototype.
+2. Expand Hub_Original and the seven TestBase models. Expand Zone01_TornadoTown through Zone05_InfernoForest. Select any wall, fence, nest or prop and check that it is an editable anchored Part.
+3. The map-only modular export is studio/exports/StealADisaster_EggLayout_Map.rbxmx. Import this only into a blank Place, not over the saved Place.
 
-### Build and test
-1. At repo root, run `rojo build default.project.json -o build/five-zone-test.rbxlx` with Rojo 7.6.1 (or pinned Rokit).
-2. Open the generated file in a **new local test Roblox Studio**, not a live game. Press **Play**.
-3. Train Speed at the blue stand in hub, travel *straight* to Zone 1, choose Stabilize or Snatch at the glowing crate, outrun Warden past green line, and use your own base station to open it.
-4. Train to 40/120/230/350 Speed Power, repeat in Zone 2/3/4/5. Compare readability and return times along pale shoulder; do not skip long-distance route verification.
-5. Studio Test → **2 Players** to attempt simultaneous claim in the same Zone, different Zone claims at the same time, wrong-base opens, repeated prompt spamming, respawn while carrying, and reconnects.
-6. Check mobile (touch prompts and HUD), actual Warden collision/route quality, Script Output, and performance (FPS/instance count). Attach screenshots and actual results.
+## Actual Playtest — NOT YET RUN
 
-### Validation contract
-- `node --test tests/prototype.static.test.cjs`: code contracts only, **not a physics/play simulation**.
-- `stylua --check src`: format and parse; record any nonzero exit as pending.
-- `rojo build ...`: Luau source packaging; does **not** prove Roblox Studio can execute the entire game.
+1. Press Play. Train Speed and go to Zone 1; capture with Stabilize or Snatch, escape the placeholder Warden and open a Crate at your own base.
+2. Train to 40, 120, 230, 350 Speed Power and repeat Zones 2–5; verify return-route geometry and same-tier Zone-specific rewards.
+3. Test with at least 2 players for single-claim ownership, wrong-base openings, repeated prompts, respawns and travel time; later test 7 players.
+4. Check mobile prompts, camera, FPS and Script Output. Do not publish the Place before runtime QA.
 
-**Known limitations:** The Wardens are anchored spheres with direct chase rather than pathfinding humanoids. The 5 environments are visual blockouts, **not finalized map assets** or gameplay hazards. The six hub plots do **not** settle the owner's seven unlabeled bays. No production-ready save/load, UI polish, monetization, global event engine, or published game. Studio solo/multi/mobile Playtests are mandatory before saying the five-Zone map is release-ready.
+## Automated checks
+
+- Run Python 3.10 tests/test_static_place.py to verify both 3D XML assets have five Zones, seven fenced pens and more than 1,800 saved Parts.
+- Run node --test tests/prototype.static.test.cjs to check the server-side source contracts.
+- Run stylua --check src and a disposable Rojo build to verify Luau source formatting/export. These checks are not Studio runtime evidence.
+
+Limitations: Warden is a placeholder direct chase with no real pathfinding; earnings are memory-only; persistent save, finalized UI and global LiveOps remain unimplemented.

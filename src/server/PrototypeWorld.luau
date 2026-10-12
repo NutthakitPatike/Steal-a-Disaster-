@@ -62,6 +62,74 @@ local function prompt(owner: BasePart, action: string, hold: number): ProximityP
 end
 
 function World.create(name: string)
+    -- A saved Studio Place takes priority: its Parts/Models already exist in Workspace.
+    -- The fallback below is kept only for a blank Rojo test place.
+    local existing = workspace:FindFirstChild(name)
+    if existing then
+        local zones = {}
+        for zoneId, definition in ipairs(Config.Zones) do
+            local folderName = ("Zone%02d_%s"):format(zoneId, definition.Name:gsub("%s+", ""))
+            local folder = assert(
+                existing:FindFirstChild(folderName, true),
+                "Missing saved Zone: " .. folderName
+            )
+            local guard =
+                assert(folder:FindFirstChild("Warden_" .. zoneId), "Missing saved Warden") :: BasePart
+            local gate = assert(
+                folder:FindFirstChild("SafeExit_" .. zoneId),
+                "Missing saved safe exit"
+            ) :: BasePart
+            local nodes = {}
+            for j = 1, 2 do
+                local marker = assert(
+                    folder:FindFirstChild("CrateSpawn" .. j),
+                    "Missing saved crate marker"
+                ) :: BasePart
+                table.insert(nodes, marker.Position + Vector3.new(0, 2.9, 0))
+            end
+            table.insert(zones, {
+                id = zoneId,
+                name = definition.Name,
+                folder = folder,
+                nodes = nodes,
+                centerZ = guard.Position.Z + 20,
+                safeExitZ = gate.Position.Z + 1,
+                warden = guard,
+                guardOrigin = guard.Position,
+            })
+        end
+        local plots = {}
+        for slot = 1, 7 do
+            local pad = assert(
+                existing:FindFirstChild("TestPlot" .. slot, true),
+                "Missing saved base pad"
+            ) :: BasePart
+            local station = assert(
+                existing:FindFirstChild("CrateOpener" .. slot, true),
+                "Missing saved opener"
+            ) :: BasePart
+            local open = assert(
+                station:FindFirstChild("Open CratePrompt"),
+                "Missing saved opener prompt"
+            ) :: ProximityPrompt
+            table.insert(plots, { pad = pad, station = station, open = open })
+        end
+        local trainer =
+            assert(existing:FindFirstChild("SpeedTrainer", true), "Missing saved Speed trainer")
+        local trainPrompt = assert(
+            trainer:FindFirstChild("Train +10 SpeedPrompt"),
+            "Missing saved trainer prompt"
+        ) :: ProximityPrompt
+        return {
+            root = existing,
+            zones = zones,
+            plots = plots,
+            trainPrompt = trainPrompt,
+            part = part,
+            label = label,
+            prompt = prompt,
+        }
+    end
     assert(workspace:FindFirstChild(name) == nil, "Prototype workspace already exists")
     local root = Instance.new("Folder")
     root.Name = name
@@ -71,7 +139,7 @@ function World.create(name: string)
         root,
         "HubFloor",
         Vector3.new(0, -1, 9),
-        Vector3.new(188, 2, 140),
+        Vector3.new(310, 2, 140),
         Color3.fromRGB(90, 110, 127)
     )
     part(
@@ -111,10 +179,10 @@ function World.create(name: string)
     )
     label(guide, "MapLabel", "5 ZONES STRAIGHT AHEAD\nRETURN LANE ON RIGHT", Vector3.new(0, 8, 0))
 
-    -- Six temporary test bases do NOT decide the owner's seven unlabeled bays.
+    -- Seven prototype bases support the 7-player reference-style arrangement.
     local plots = {}
-    for slot = 1, 6 do
-        local x = (slot - 3.5) * 29
+    for slot = 1, 7 do
+        local x = (slot - 4) * 41
         local pad = part(
             root,
             "TestPlot" .. slot,

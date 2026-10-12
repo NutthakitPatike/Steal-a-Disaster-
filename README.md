@@ -32,7 +32,7 @@ Use a new task-specific branch name instead of `feat/zone1-greybox` when working
 - `src/client/Bootstrap.client.luau`: client-side startup message.
 - `src/shared/Config.luau`: working title and prototype version.
 - `default.project.json`: maps source folders into ServerScriptService, StarterPlayerScripts and ReplicatedStorage using Rojo.
-- The five-Zone original map is generated at **runtime inside Roblox Studio** from `src/server/ZoneMap.luau` and `src/server/PrototypeWorld.luau` using Roblox Parts, not imported from Steal An Egg. No permanent Studio geometry is tracked yet.
+- The **primary map is a permanent editable 3D Roblox Place**, [studio/places/StealADisaster_EggLayout_Static.rbxlx](studio/places/StealADisaster_EggLayout_Static.rbxlx). A reusable map-only model is [studio/exports/StealADisaster_EggLayout_Map.rbxmx](studio/exports/StealADisaster_EggLayout_Map.rbxmx). There are **7 fenced pens, five sequential Zones and ~1,897 editable Parts**, visible in Studio **before Play**. See [map asset guide](docs/MAP_ASSET.md).
 - The server prototype in `src/server/TornadoTownPrototype.server.luau` has one Warden/crate per test Zone and memory-only base reveal; see [five-Zone test runbook](docs/PROTOTYPE_RUNBOOK.md).
 - `rokit.toml`: declares Rojo, Selene, StyLua and Wally versions. Declared does not mean installed.
 
@@ -46,9 +46,9 @@ Use a new task-specific branch name instead of `feat/zone1-greybox` when working
 
 The commands above are the intended team workflow. On 2026-10-13, temporary standalone **Rojo 7.6.1 and StyLua 2.3.1** were used on the Head's machine to build/parse the Studio-only map; they are not installed globally in PATH. See [CURRENT_STATE.md](CURRENT_STATE.md) for actual results. Do not equate a successful Rojo build with passing Studio gameplay tests.
 
-## Try the five-Zone source prototype
+## Open the editable five-Zone map
 
-Run `rojo build default.project.json -o build/five-zones.rbxlx`, then open the generated local file in Roblox Studio and press Play. The original themed map and crate/Warden tests are **Studio-only**, and the [test runbook](docs/PROTOTYPE_RUNBOOK.md) records the missing solo/2-player/mobile verification. The Steal An Egg `.rbxlx` geometry was not copied or imported: only generalized layout/progression ideas informed an independently generated map.
+**Open `studio/places/StealADisaster_EggLayout_Static.rbxlx` directly in Roblox Studio.** You will see all 7 player pens, the five biome Zones, terrain/walls, nest markers and guardians in **Edit mode**, without pressing Play or using Rojo. The saved Place includes the temporary test scripts. For a map-only export, import `studio/exports/StealADisaster_EggLayout_Map.rbxmx` into a blank Place. See [map asset guide](docs/MAP_ASSET.md) and [test runbook](docs/PROTOTYPE_RUNBOOK.md). This visual layout follows public gameplay references for Steal An Egg while using independently created geometry; it is not a direct conversion of the inaccessible third-party Place export.
 
 ## Studio MCP and skill setup
 See [docs/STUDIO_MCP.md](docs/STUDIO_MCP.md) for ChatGPT/lnwjud and Codex routes. Available local skill names include pstack's `poteto-mode`, `ponytail`, and task-specific `roblox-*`; [AGENTS.md](AGENTS.md) defines when to use them. Each contributor must check their own setup. Do not copy third-party plugin code into Git.

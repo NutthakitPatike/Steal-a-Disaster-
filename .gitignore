@@ -18,6 +18,10 @@ Thumbs.db
 # Explicitly version only reviewed, modular Studio-authored XML exports.
 !studio/exports/**/*.rbxmx
 !studio/exports/*.rbxmx
+# Reviewed first-party editable static Studio place snapshots (no third-party source maps).
+!studio/places/StealADisaster_EggLayout_Static.rbxlx
+# Local Roblox Studio lock files are never versioned.
+*.rbxlx.lock
 
 # Package-manager generated content; commit lockfiles separately when packages are introduced.
 Packages/

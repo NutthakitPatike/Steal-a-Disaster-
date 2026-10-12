@@ -14,14 +14,14 @@ Initial GitHub seed HEAD: `c008cbfaab5539a5e29d91af87d4eac646092cf2` (initial pu
 - The ten supplied reference place exports are indexed in `docs/REFERENCE_SOURCES.md`. An updated source-only ZIP with all 26,917 script instance records and 10,128 code-like Source texts was generated as a ChatGPT artifact, **not copied to D:**; failed decompiler bodies and empty bytecode are separately flagged.
 
 ## In Progress
-- Head accepted **Containment Crates (not eggs)** for `docs/GAME_VISION.md` v0.5: crates of varying rarity spawn in NPC-guarded Zones; Stabilize/Snatch changes escape risk; players carry crates home and open them at their base for a second randomized Disaster result within the crate tier (e.g., different quality Secret Disasters). Tiny weather creatures start the progression; later Zones may have themed crates. This is **approved concept**, not coded, balanced or playtested. No gameplay implementation has started.
+- Head accepted **Containment Crates (not eggs)** for `docs/GAME_VISION.md` v0.6: crates of varying rarity spawn in NPC-guarded Zones; Stabilize/Snatch changes escape risk; players carry crates home and open them at their base for a second randomized Disaster result within the crate tier (e.g., different quality Secret Disasters). Tiny weather creatures start the progression; later Zones may have themed crates. This is **approved concept**, not coded, balanced or playtested. No gameplay implementation has started.
 - Documentation and bootstrap files are now live on GitHub `main`: three-person PR collaboration, AI-agnostic task instructions, an onboarding quick start, and Studio-authored modular `.rbxmx` exports. No application behavior or playable gameplay was added.
 
 ## Blocked
 - Rokit, Rojo, Selene, StyLua and Wally were not found in PATH on the inspected Head machine.
 - The GitHub repository is **public and seeded**, but main is **not protected** (`protected: false` confirmed from the GitHub branch API). Branch-protection endpoint access returned HTTP 403 to the connected GitHub integration, and the local Chrome profile is not signed into GitHub; mandatory PR/review protections cannot yet be configured by the available tools. Collect two GitHub usernames, invite them with Write access and configure rules in repository Settings. Teammate clones and Roblox Studio rights are not yet verified.
 - Head-to-Roblox-Studio control through ChatGPT + lnwjud MCP is not verified; lnwjud's discovered standalone MCP server list did not include a Roblox Studio server.
-- Game Design v0.5 specific crate spawn/loot odds, prototype balance, hidden reward persistence, real member assignments, Roblox Group ownership and staging place still need confirmation.
+- Game Design v0.6 specific crate spawn/loot odds, prototype balance, hidden reward persistence, live-event administrator privileges/reward limits, weekly release logistics, real member assignments, Roblox Group ownership and staging place still need confirmation.
 
 ## Known Issues
 - No gameplay, persistence, UI, map or formal test suite exists in tracked source.

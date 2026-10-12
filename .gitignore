@@ -1,0 +1,31 @@
+# Local tooling and generated builds
+build/
+out/
+temp/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.vscode/*.code-workspace
+.idea/
+
+# Roblox place files are handled through controlled snapshots/asset review.
+# Do not casually commit large binary copies or downloaded third-party games.
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+
+# Package-manager generated content; commit lockfiles separately when packages are introduced.
+Packages/
+ServerPackages/
+DevPackages/
+sourcemap.json
+
+# Secrets and machine-local configuration
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.p12

@@ -1,0 +1,6 @@
+# Versions chosen from publicly documented Roblox toolchains; adjust together as a team after testing.
+[tools]
+rojo = "rojo-rbx/rojo@7.6.1"
+selene = "Kampfkarren/selene@0.29.0"
+stylua = "JohnnyMorganz/StyLua@2.3.1"
+wally = "UpliftGames/wally@0.3.2"

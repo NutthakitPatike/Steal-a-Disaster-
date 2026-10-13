@@ -258,7 +258,7 @@ function Schema.Validate(profile: any): (boolean, string?)
         if
             type(pending.crateId) ~= "string"
             or #pending.crateId < 8
-            or #pending.crateId > 64
+            or #pending.crateId > 62
             or not pending.crateId:match("^[%w_%-]+$")
             or not Definitions.IsZoneId(pending.zoneId)
             or profile.unlockedZones[pending.zoneId] ~= true
@@ -272,6 +272,58 @@ function Schema.Validate(profile: any): (boolean, string?)
         then
             return false, "InvalidReturnPending"
         end
+    end
+    local bankCount = 0
+    for crateId, crate in pairs(profile.bankedCrates) do
+        bankCount += 1
+        if
+            type(crateId) ~= "string"
+            or #crateId < 8
+            or #crateId > 62
+            or not crateId:match("^[%w_%-]+$")
+            or type(crate) ~= "table"
+            or profile.items[crateId] ~= nil
+            or (pending and pending.crateId == crateId)
+        then
+            return false, "InvalidBankedCrate"
+        end
+        for field in pairs(crate) do
+            if
+                field ~= "zoneId"
+                and field ~= "tier"
+                and field ~= "lootVersion"
+                and field ~= "hiddenSpeciesId"
+                and field ~= "hiddenVariantId"
+                and field ~= "hiddenRank"
+                and field ~= "reservedItemId"
+                and field ~= "bankOperationId"
+            then
+                return false, "InvalidBankedCrate"
+            end
+        end
+        local species, variant = crate.hiddenSpeciesId, crate.hiddenVariantId
+        if
+            not Definitions.IsZoneId(crate.zoneId)
+            or profile.unlockedZones[crate.zoneId] ~= true
+            or (crate.tier ~= "Common" and crate.tier ~= "Rare")
+            or not int(crate.lootVersion, 1, 2147483647)
+            or type(species) ~= "string"
+            or #species < 1
+            or #species > 64
+            or not species:match("^[%w_%-]+$")
+            or type(variant) ~= "string"
+            or #variant < 1
+            or #variant > 64
+            or not variant:match("^[%w_%-]+$")
+            or not int(crate.hiddenRank, 1, 3)
+            or crate.reservedItemId ~= crateId
+            or crate.bankOperationId ~= "b_" .. crateId
+        then
+            return false, "InvalidBankedCrate"
+        end
+    end
+    if bankCount > 3 or itemCount + bankCount + (pending and 1 or 0) > Schema.MaxItems then
+        return false, "CapacityFull"
     end
     if not serializable(profile, 0, {}, { 0 }) then
         return false, "NotSerializable"

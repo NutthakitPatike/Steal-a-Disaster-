@@ -28,6 +28,7 @@ end
 local function validWitness(witness: any): boolean
     return type(witness) == "table"
         and identifier(witness.crateId)
+        and #witness.crateId <= 62
         and Definitions.IsZoneId(witness.zoneId)
         and (witness.tier == "Common" or witness.tier == "Rare")
         and whole(witness.lootVersion, 1, 2147483647)

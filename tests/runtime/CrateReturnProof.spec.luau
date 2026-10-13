@@ -20,7 +20,12 @@ return function(): number
     local position = Vector3.new(0, 0, -5)
     local alive = true
     local assigned = 2
-    local carried = { crateId = "crate_return_0001", zoneId = "tornado_town" }
+    local carried = {
+        crateId = "crate_return_0001",
+        zoneId = "tornado_town",
+        tier = "Rare",
+        lootVersion = 2,
+    }
     local service = {
         GetCarry = function(_self, id)
             return id == 101 and carried or nil
@@ -75,8 +80,23 @@ return function(): number
     )
     local replay, replayReason = gate:Step(101, 70)
     check(replay == nil and replayReason == "AlreadyWitnessed", "cannot mint second witness")
+    local secured, secureError = gate:Witness(101)
+    check(
+        secured
+            and secureError == nil
+            and secured.crateId == carried.crateId
+            and secured.tier == "Rare"
+            and secured.lootVersion == 2
+            and secured.exitId == "tornado_town",
+        "durable witness derives tier and loot version from server-owned carry"
+    )
     check(service:GetCarry(101) == carried, "witness never consumes crate or grants item")
     gate:Cancel(101)
+    secured, secureError = gate:Witness(101)
+    check(
+        secured == nil and secureError == "NotWitnessed",
+        "cancelled crossing cannot authorize save"
+    )
     check(gate:Status(101) == "Absent", "cancel releases witness")
 
     position = Vector3.new(0, 0, 5)

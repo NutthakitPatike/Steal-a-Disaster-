@@ -224,9 +224,20 @@ return function(): number
     )
 
     local banked = Schema.New()
-    banked.bankedCrates.a = {}
-    banked.bankedCrates.b = {}
-    banked.bankedCrates.c = {}
+    for i = 1, 3 do
+        local crateId = "banked_crate_" .. tostring(i)
+        banked.bankedCrates[crateId] = {
+            zoneId = "tornado_town",
+            tier = "Common",
+            lootVersion = 1,
+            hiddenSpeciesId = "species_1",
+            hiddenVariantId = "normal",
+            hiddenRank = 1,
+            reservedItemId = crateId,
+            bankOperationId = "b_" .. crateId,
+        }
+    end
+    check(Schema.Validate(banked) == true, "bank capacity fixture valid")
     rejected, why = Transactions.Apply(
         banked,
         "crate_banked_00001",

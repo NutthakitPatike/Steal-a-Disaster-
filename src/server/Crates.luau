@@ -44,9 +44,10 @@ local function validUser(userId: any): boolean
 end
 
 local function validId(value: any): boolean
+    -- Reserve two characters for deterministic "b_" banking operation IDs.
     return type(value) == "string"
         and #value >= 8
-        and #value <= 64
+        and #value <= 62
         and value:match("^[%w_%-]+$") ~= nil
 end
 
@@ -60,6 +61,7 @@ function Crates.new(clock: () -> number, observe: (number, any) -> any)
         observe = observe,
         crates = {},
         carrying = {},
+        secured = {},
         reservations = {},
         zoneCounts = {},
         activeCount = 0,
@@ -307,6 +309,9 @@ end
 -- Secure-return and bank transitions belong to the separate durable protocol.
 function Crates:ClearPlayer(userId: number)
     self:Cancel(userId)
+    -- Secured crates remain durable in the profile. Never delete returnPending
+    -- just because a character dies or the player disconnects.
+    self.secured[userId] = nil
     local crateId = self.carrying[userId]
     self.carrying[userId] = nil
     local crate = crateId and self.crates[crateId]
@@ -328,6 +333,79 @@ function Crates:GetCarry(userId: number)
         tier = crate.tier,
         lootVersion = crate.lootVersion,
     }
+end
+
+-- Restore ONLY from a validated, owned server profile after physically reaching
+-- its Zone's safe-exit checkpoint. This has no rewards or world teleports.
+function Crates:RestoreSecured(userId: number, profile: any)
+    local Schema = require(script.Parent:WaitForChild("ProfileSchema"))
+    if not validUser(userId) or not Schema.Validate(profile) or not profile.returnPending then
+        return nil, "InvalidProfile"
+    end
+    local pending = profile.returnPending
+    if self.carrying[userId] then
+        -- A freshly secured exit has a durable returnPending but still has
+        -- the earlier temporary PvE carry. Convert only THAT exact crate.
+        local held = self:GetCarry(userId)
+        if
+            not held
+            or held.crateId ~= pending.crateId
+            or held.zoneId ~= pending.zoneId
+            or held.tier ~= pending.tier
+            or held.lootVersion ~= pending.lootVersion
+        then
+            return nil, "AlreadyCarrying"
+        end
+        -- Discard the uncommitted temporary state; durable returnPending stays
+        -- in the profile and is authoritative after this conversion.
+        self:ClearPlayer(userId)
+    end
+    if self.secured[userId] then
+        if self.secured[userId].crateId == pending.crateId then
+            return Schema.Clone(self.secured[userId]), nil
+        end
+        return nil, "AlreadySecured"
+    end
+    local active = self.crates[pending.crateId]
+    if
+        active
+        and (active.state == "Available" or active.state == "Reserved" or active.state == "Carried")
+    then
+        return nil, "ConflictingCrate"
+    end
+    for holder, existing in pairs(self.secured) do
+        if holder ~= userId and existing.crateId == pending.crateId then
+            return nil, "DuplicateSecuredCrate"
+        end
+    end
+    local descriptor = {
+        crateId = pending.crateId,
+        zoneId = pending.zoneId,
+        tier = pending.tier,
+        lootVersion = pending.lootVersion,
+    }
+    self.secured[userId] = descriptor
+    return Schema.Clone(descriptor), nil
+end
+
+function Crates:GetSecured(userId: number)
+    local stored = self.secured[userId]
+    return stored
+            and {
+                crateId = stored.crateId,
+                zoneId = stored.zoneId,
+                tier = stored.tier,
+                lootVersion = stored.lootVersion,
+            }
+        or nil
+end
+
+function Crates:ReleaseSecured(userId: number, crateId: string): boolean
+    if self.secured[userId] and self.secured[userId].crateId == crateId then
+        self.secured[userId] = nil
+        return true
+    end
+    return false
 end
 
 function Crates:Status(crateId: string): string

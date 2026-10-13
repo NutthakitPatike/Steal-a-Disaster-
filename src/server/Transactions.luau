@@ -7,6 +7,39 @@ local Schema = require(ServerScriptService:WaitForChild("Server"):WaitForChild("
 
 local Transactions = {}
 
+-- Domain callbacks may change gameplay state, never the profile writer or
+-- transaction ledger. In particular, a mutation must not forge a valid-looking
+-- new session or edit the receipt history before the canonical receipt is added.
+local function sameTable(a: any, b: any): boolean
+    if type(a) ~= type(b) then
+        return false
+    end
+    if type(a) ~= "table" then
+        return a == b
+    end
+    for key, value in pairs(a) do
+        if not sameTable(value, b[key]) then
+            return false
+        end
+    end
+    for key in pairs(b) do
+        if a[key] == nil then
+            return false
+        end
+    end
+    return true
+end
+
+local function metadataUnchanged(before: any, after: any): boolean
+    return before.schemaVersion == after.schemaVersion
+        and before.contentVersion == after.contentVersion
+        and before.revision == after.revision
+        and before.fencingCounter == after.fencingCounter
+        and sameTable(before.session, after.session)
+        and sameTable(before.receipts, after.receipts)
+        and sameTable(before.receiptOrder, after.receiptOrder)
+end
+
 function Transactions.Apply(existing: any, operationId: string, expectedRevision: number, mutate: (any) -> (boolean, any))
     if type(operationId) ~= "string" or #operationId < 8 or #operationId > 64
         or not operationId:match("^[%w_%-]+$") then
@@ -33,6 +66,9 @@ function Transactions.Apply(existing: any, operationId: string, expectedRevision
     end
     if accepted ~= true then
         return nil, type(result) == "string" and result or "Rejected"
+    end
+    if not metadataUnchanged(existing, changed) then
+        return nil, "ForbiddenMetadataMutation"
     end
     changed.revision += 1
     local receipt = {

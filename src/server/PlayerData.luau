@@ -215,6 +215,11 @@ function PlayerData:Close(userId: number, now: number)
                 rejected = reason or "InvalidProfile"
                 return nil
             end
+            -- Previous Close may have committed even if its acknowledgement was lost.
+            -- An already absent lease is safe to finalize; never clear a foreign owner.
+            if current.session == nil then
+                return current
+            end
             if not sameSession(current, owned, now) then
                 return nil
             end

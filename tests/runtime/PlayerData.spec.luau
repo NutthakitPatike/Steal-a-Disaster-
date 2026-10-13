@@ -104,6 +104,10 @@ return function(): number
     receipt, errorCode = a:Transact(111, "op_credit_00006", 3, 232, grant(99))
     check(receipt == nil and errorCode == "LeaseLost", "stale owner cannot write")
     check(store.records["PlayerV1_111"].coins == 86, "fenced write no mint")
+    local foreignClosed, foreignCloseCode = a:Close(111, 232)
+    check(not foreignClosed and foreignCloseCode == "LeaseLost"
+        and store.records["PlayerV1_111"].session.ownerJobId == "server-B",
+        "stale owner cannot close another server's lease")
     store.records["PlayerV1_222"] = { schemaVersion = 999 }
     local bad, badReason = a:Acquire(222, "server-A", 200)
     check(bad == nil and badReason == "FutureSchema", "future data fail closed")
@@ -116,6 +120,14 @@ return function(): number
     check(closed and closeError == nil, "close owned session")
     p, e = a:Acquire(111, "server-A", 233)
     check(p and not e and p.coins == 86, "rejoin reloads committed balance")
+    -- Closing is also ambiguous if the storage commit succeeds but ACK is lost.
+    store.failAfter = true
+    closed, closeError = a:Close(111, 234)
+    check(not closed and closeError == "StorageUnavailable", "close committed without ACK")
+    check(store.records["PlayerV1_111"].session == nil, "close actually released lease")
+    closed, closeError = a:Close(111, 235)
+    check(closed and closeError == nil and a:GetServerSnapshot(111) == nil,
+        "close retry recognizes already released lease")
     -- Acquiring a lease can also commit while the transport loses its ACK.
     local secondStore = fakeStore()
     secondStore.failAfter = true

@@ -167,7 +167,9 @@ function PlayerData:Renew(userId: number, now: number)
     if not owned or not validTime(now) then
         return false, "NotReady"
     end
-    if self.busy[userId] or self.pending[userId] then
+    -- Pending gameplay writes must not block independent lease renewal.
+    -- Renewal updates session metadata only; it never acknowledges the write.
+    if self.busy[userId] then
         return false, "Busy"
     end
     self.busy[userId] = true

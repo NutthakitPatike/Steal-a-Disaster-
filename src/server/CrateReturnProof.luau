@@ -137,6 +137,65 @@ function ReturnProof:Status(userId: number): string
     return state and state.stage or "Absent"
 end
 
+-- A save coordinator can consume an already-completed physical witness.
+-- Never accept a caller-supplied witness or award anything before durable ACK.
+function ReturnProof:Witness(userId: number)
+    local state = self.paths[userId]
+    if not state or state.stage ~= "AwaitingDurableCommit" then
+        return nil, "NotWitnessed"
+    end
+    local carry = self.crates:GetCarry(userId)
+    if
+        not carry
+        or carry.crateId ~= state.crateId
+        or carry.zoneId ~= state.zoneId
+        or (carry.tier ~= "Common" and carry.tier ~= "Rare")
+        or type(carry.lootVersion) ~= "number"
+        or carry.lootVersion % 1 ~= 0
+        or carry.lootVersion < 1
+        or carry.lootVersion > 2147483647
+    then
+        self:Cancel(userId)
+        return nil, "CarryChanged"
+    end
+    local exitPart = state.exitPart
+    if
+        not exitPart:IsDescendantOf(workspace)
+        or not exitPart.Anchored
+        or exitPart:GetAttribute("ZoneId") ~= state.zoneId
+        or exitPart:GetAttribute("ZoneSide") ~= "-Z"
+        or exitPart.CFrame ~= state.originalCFrame
+        or exitPart.Size ~= state.originalSize
+    then
+        self:Cancel(userId)
+        return nil, "AnchorChanged"
+    end
+    local actor = self.observer:Character(userId)
+    if not actor or not positionValid(actor.position) then
+        self:Cancel(userId)
+        return nil, "NotReady"
+    end
+    local point = exitPart.CFrame:PointToObjectSpace(actor.position)
+    local half = exitPart.Size * 0.5
+    if
+        math.abs(point.X) > half.X
+        or math.abs(point.Y) > half.Y
+        or point.Z < half.Z
+        or point.Z > half.Z + APPROACH_RANGE
+    then
+        self:Cancel(userId)
+        return nil, "LeftExit"
+    end
+    return {
+        crateId = state.crateId,
+        zoneId = state.zoneId,
+        tier = carry.tier,
+        lootVersion = carry.lootVersion,
+        exitId = state.zoneId,
+    },
+        nil
+end
+
 local function insideCrossSection(localPoint: Vector3, half: Vector3): boolean
     return math.abs(localPoint.X) <= half.X and math.abs(localPoint.Y) <= half.Y
 end

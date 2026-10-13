@@ -1,5 +1,7 @@
 --!strict
 -- P1-03: versioned, server-only profile values. Never hydrate after a failed load.
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Definitions = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Definitions"))
 local Schema = {}
 
 Schema.Version = 1
@@ -9,11 +11,19 @@ Schema.MaxSerializedBytes = 256 * 1024
 Schema.MaxCoins = 1000000000
 
 local function int(value: any, lo: number, hi: number): boolean
-    return type(value) == "number" and value == value and value % 1 == 0
-        and value >= lo and value <= hi
+    return type(value) == "number"
+        and value == value
+        and value % 1 == 0
+        and value >= lo
+        and value <= hi
 end
 
-local function serializable(value: any, depth: number, seen: {[any]: boolean}, budget: {number}): boolean
+local function serializable(
+    value: any,
+    depth: number,
+    seen: { [any]: boolean },
+    budget: { number }
+): boolean
     budget[1] += 1
     if budget[1] > 12000 or depth > 12 then
         return false
@@ -29,7 +39,10 @@ local function serializable(value: any, depth: number, seen: {[any]: boolean}, b
     end
     seen[value] = true
     for key, child in pairs(value) do
-        if not (type(key) == "string" or (int(key, 1, 20000))) or not serializable(child, depth + 1, seen, budget) then
+        if
+            not (type(key) == "string" or (int(key, 1, 20000)))
+            or not serializable(child, depth + 1, seen, budget)
+        then
             return false
         end
     end
@@ -90,28 +103,55 @@ function Schema.Validate(profile: any): (boolean, string?)
         return false, "InvalidProfile"
     end
     if not int(profile.schemaVersion, 1, Schema.Version) then
-        return false, type(profile.schemaVersion) == "number" and profile.schemaVersion > Schema.Version and "FutureSchema" or "InvalidSchema"
+        return false,
+            type(profile.schemaVersion) == "number"
+                    and profile.schemaVersion > Schema.Version
+                    and "FutureSchema"
+                or "InvalidSchema"
     end
-    if not int(profile.revision, 0, 2147483647) or not int(profile.contentVersion, 1, 2147483647) then
+    if
+        not int(profile.revision, 0, 2147483647) or not int(profile.contentVersion, 1, 2147483647)
+    then
         return false, "InvalidRevision"
     end
-    if not int(profile.coins, 0, Schema.MaxCoins) or not int(profile.speedPowerMilli, 0, 10000000) then
+    if
+        not int(profile.coins, 0, Schema.MaxCoins) or not int(profile.speedPowerMilli, 0, 10000000)
+    then
         return false, "InvalidBalances"
     end
-    if not map(profile.upgrades)
+    if
+        not map(profile.upgrades)
         or not int(profile.upgrades.treadmill, 0, 3)
         or not int(profile.upgrades.pen, 0, 3)
-        or (profile.upgrades.slots ~= 4 and profile.upgrades.slots ~= 6 and profile.upgrades.slots ~= 8) then
+        or (
+            profile.upgrades.slots ~= 4
+            and profile.upgrades.slots ~= 6
+            and profile.upgrades.slots ~= 8
+        )
+    then
         return false, "InvalidUpgrades"
     end
-    for _, name in ipairs({"unlockedZones", "successfulDeliveries", "ownedTrails", "items", "bankedCrates",
-        "index", "indexBonusClaimed", "receipts", "receiptOrder", "pendingTransfers",
-        "pendingItemOperations", "eventClaims"}) do
+    for _, name in ipairs({
+        "unlockedZones",
+        "successfulDeliveries",
+        "ownedTrails",
+        "items",
+        "bankedCrates",
+        "index",
+        "indexBonusClaimed",
+        "receipts",
+        "receiptOrder",
+        "pendingTransfers",
+        "pendingItemOperations",
+        "eventClaims",
+    }) do
         if not map(profile[name]) then
             return false, "Invalid_" .. name
         end
     end
-    if type(profile.equippedTrail) ~= "string" or #profile.equippedTrail > 64
+    if
+        type(profile.equippedTrail) ~= "string"
+        or #profile.equippedTrail > 64
         or not int(profile.storedIncomeMilli, 0, 1000000000000)
         or not int(profile.incomeRemainder, 0, 999)
         or not int(profile.lastCheckpointAt, 0, 9999999999)
@@ -119,7 +159,8 @@ function Schema.Validate(profile: any): (boolean, string?)
         or not int(profile.activePlaySeconds, 0, 1000000000)
         or not int(profile.shieldUntil, 0, 9999999999)
         or not int(profile.shieldCooldownUntil, 0, 9999999999)
-        or not int(profile.fencingCounter, 0, 2147483647) then
+        or not int(profile.fencingCounter, 0, 2147483647)
+    then
         return false, "InvalidProgress"
     end
     if profile.unlockedZones.tornado_town ~= true then
@@ -128,14 +169,23 @@ function Schema.Validate(profile: any): (boolean, string?)
     local itemCount, slots = 0, {}
     for id, item in pairs(profile.items) do
         itemCount += 1
-        if type(id) ~= "string" or #id > 64 or #id == 0 or type(item) ~= "table"
-            or type(item.speciesId) ~= "string" or #item.speciesId > 64
+        if
+            type(id) ~= "string"
+            or #id > 64
+            or #id == 0
+            or type(item) ~= "table"
+            or type(item.speciesId) ~= "string"
+            or #item.speciesId > 64
             or not int(item.rank, 1, 3)
-            or type(item.variantId) ~= "string" or #item.variantId > 64
-            or type(item.originZone) ~= "string" or #item.originZone > 64
+            or type(item.variantId) ~= "string"
+            or #item.variantId > 64
+            or type(item.originZone) ~= "string"
+            or #item.originZone > 64
             or not int(item.itemVersion, 1, 2147483647)
-            or type(item.locked) ~= "boolean" or type(item.transferTracked) ~= "boolean"
-            or not int(item.acquiredAt, 0, 9999999999) then
+            or type(item.locked) ~= "boolean"
+            or type(item.transferTracked) ~= "boolean"
+            or not int(item.acquiredAt, 0, 9999999999)
+        then
             return false, "InvalidItem"
         end
         if item.slotId ~= nil then
@@ -160,20 +210,70 @@ function Schema.Validate(profile: any): (boolean, string?)
         return false, "TooManyReceipts"
     end
     for id, receipt in pairs(profile.receipts) do
-        if not unique[id] or type(receipt) ~= "table" or receipt.operationId ~= id
-            or not int(receipt.revision, 1, profile.revision) then
+        if
+            not unique[id]
+            or type(receipt) ~= "table"
+            or receipt.operationId ~= id
+            or not int(receipt.revision, 1, profile.revision)
+        then
             return false, "InvalidReceipt"
         end
     end
     local session = profile.session
-    if session ~= nil and (type(session) ~= "table"
-        or type(session.ownerJobId) ~= "string" or #session.ownerJobId == 0
-        or type(session.token) ~= "string" or #session.token == 0
-        or not int(session.generation, 1, profile.fencingCounter)
-        or not int(session.leaseExpiry, 0, 9999999999)) then
+    if
+        session ~= nil
+        and (
+            type(session) ~= "table"
+            or type(session.ownerJobId) ~= "string"
+            or #session.ownerJobId == 0
+            or type(session.token) ~= "string"
+            or #session.token == 0
+            or not int(session.generation, 1, profile.fencingCounter)
+            or not int(session.leaseExpiry, 0, 9999999999)
+        )
+    then
         return false, "InvalidSession"
     end
-    if not serializable(profile, 0, {}, {0}) then
+    -- P1-04: secured exit checkpoint is durable, but not yet a banked reward.
+    -- Reject unknown fields and any duplicate/invalid identity before loading.
+    local pending = profile.returnPending
+    if pending ~= nil then
+        if type(pending) ~= "table" then
+            return false, "InvalidReturnPending"
+        end
+        for field in pairs(pending) do
+            if
+                field ~= "crateId"
+                and field ~= "zoneId"
+                and field ~= "tier"
+                and field ~= "lootVersion"
+                and field ~= "exitId"
+                and field ~= "checkpointVersion"
+                and field ~= "secureOperationId"
+                and field ~= "securedAt"
+            then
+                return false, "InvalidReturnPending"
+            end
+        end
+        if
+            type(pending.crateId) ~= "string"
+            or #pending.crateId < 8
+            or #pending.crateId > 64
+            or not pending.crateId:match("^[%w_%-]+$")
+            or not Definitions.IsZoneId(pending.zoneId)
+            or profile.unlockedZones[pending.zoneId] ~= true
+            or (pending.tier ~= "Common" and pending.tier ~= "Rare")
+            or not int(pending.lootVersion, 1, 2147483647)
+            or pending.exitId ~= pending.zoneId
+            or pending.secureOperationId ~= pending.crateId
+            or pending.checkpointVersion ~= 1
+            or not int(pending.securedAt, 0, 9999999999)
+            or profile.bankedCrates[pending.crateId] ~= nil
+        then
+            return false, "InvalidReturnPending"
+        end
+    end
+    if not serializable(profile, 0, {}, { 0 }) then
         return false, "NotSerializable"
     end
     return true, nil

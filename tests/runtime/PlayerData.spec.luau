@@ -78,6 +78,11 @@ return function(): number
     receipt, errorCode = a:Transact(111, "op_credit_00003", 1, 104, grant(5))
     check(receipt == nil and errorCode == "SavePending", "lost ACK unresolved")
     check(store.records["PlayerV1_111"].coins == 85, "lost ACK committed")
+    local pendingRenewed, pendingRenewCode = a:Renew(111, 105)
+    check(pendingRenewed and pendingRenewCode == nil, "pending write permits lease renewal")
+    check(store.records["PlayerV1_111"].session.leaseExpiry == 225
+        and store.records["PlayerV1_111"].coins == 85,
+        "renew preserves pending gameplay outcome")
     receipt, errorCode = a:Transact(111, "op_credit_00004", 2, 105, grant(500))
     check(receipt == nil and errorCode == "Busy", "pending blocks new operation")
     receipt, errorCode = a:Transact(111, "op_credit_00003", 1, 106, grant(5))

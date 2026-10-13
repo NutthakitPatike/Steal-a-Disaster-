@@ -81,6 +81,8 @@ function SessionLifecycle:Transact(userId: number, operationId: string, expected
         -- Block new gameplay requests until its receipt is reconciled.
         local state = self.sessions[userId]
         state.status = "Pending"
+        state.pendingOperationId = operationId
+        state.pendingRevision = expectedRevision
         state.errorCode = issue
     end
     return receipt, issue
@@ -93,10 +95,15 @@ function SessionLifecycle:ResolvePending(userId: number, operationId: string, ex
         or now >= state.leaseExpiry - EXPIRY_MARGIN then
         return nil, "NotReady"
     end
-    -- PlayerData enforces the SAME operationId as the ambiguous attempt.
+    -- Preserve the original operation and revision during ambiguous retries.
+    if state.pendingOperationId ~= operationId or state.pendingRevision ~= expectedRevision then
+        return nil, "WrongPendingOperation"
+    end
     local receipt, issue = self.data:Transact(userId, operationId, expectedRevision, now, mutation)
     if receipt then
         state.status = "Ready"
+        state.pendingOperationId = nil
+        state.pendingRevision = nil
         state.errorCode = nil
     elseif issue == "LeaseLost" then
         state.status = "Expired"
@@ -109,6 +116,10 @@ function SessionLifecycle:Leave(userId: number, now: number): (boolean, string?)
     local state = self.sessions[userId]
     if not state or not validTime(now) then
         return false, "NotManaged"
+    end
+    -- Leaving must not discard an unresolved operation receipt.
+    if state.status == "Pending" then
+        return false, "PendingOperation"
     end
     state.status = "Closing"
     local ok, issue = self.data:Close(userId, now)
@@ -138,8 +149,10 @@ function SessionLifecycle:Heartbeat(now: number)
                     recovered += 1
                 end
             end
-        elseif state.status == "Ready" or state.status == "Degraded" then
+        elseif state.status == "Ready" or state.status == "Degraded"
+            or state.status == "Pending" then
             if now >= state.nextRenewAt then
+                local wasPending = state.status == "Pending"
                 local ok, issue = self.data:Renew(userId, now)
                 if ok then
                     local profile = self.data:GetServerSnapshot(userId)
@@ -147,16 +160,18 @@ function SessionLifecycle:Heartbeat(now: number)
                     if owner and type(owner.leaseExpiry) == "number" and owner.leaseExpiry > now then
                         state.leaseExpiry = owner.leaseExpiry
                         state.nextRenewAt = now + RENEW_AFTER
-                        state.status = "Ready"
-                        state.errorCode = nil
+                        -- Do not unblock gameplay merely because the lease renewed.
+                        state.status = wasPending and "Pending" or "Ready"
+                        state.errorCode = wasPending and "SavePending" or nil
                         recovered += 1
                     else
-                        state.status = "Degraded"
+                        state.status = wasPending and "Pending" or "Degraded"
                         state.nextRenewAt = now + RETRY_AFTER
                         state.errorCode = "MissingRenewSnapshot"
                     end
                 else
-                    state.status = issue == "LeaseLost" and "Expired" or "Degraded"
+                    state.status = issue == "LeaseLost" and "Expired"
+                        or (wasPending and "Pending" or "Degraded")
                     state.nextRenewAt = now + RETRY_AFTER
                     state.errorCode = issue or "RenewFailed"
                 end
